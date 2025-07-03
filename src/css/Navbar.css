@@ -63,7 +63,7 @@ header {
 }
 
 .navbar-logo:hover {
-  background: linear-gradient(90deg, #7ffff3, #ff9cad, #c888fd, #7efbe4);
+  background: linear-gradient(90deg, #d7fbfa, #ffe0e0, #f0dfff, #d1fdf7);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -82,7 +82,14 @@ header {
   text-decoration: none;
   font-size: 1.1rem;
   position: relative;
-  transition: color 0.3s, opacity 0.3s ease;
+  transition: color 0.3s, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .navbar-links p {
@@ -103,8 +110,8 @@ header {
   left: 0;
   height: 2px;
   width: 0%;
-  background: white;
-  transition: width 0.3s;
+  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
+  transition: width 0.3s ease;
 }
 
 .navbar-links a:hover::after {
