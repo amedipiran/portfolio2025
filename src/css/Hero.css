@@ -19,7 +19,6 @@
   align-items: center;
   width: 100%;
   top: 45%;
-
   color: white;
   text-align: center;
   z-index: 10;
@@ -27,7 +26,7 @@
 
 .hero h1,
 .hero h2 {
-  font-size: 4em; /* override for h2 below */
+  font-size: 4em;
   padding: 0.3rem 1rem;
   background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
   -webkit-background-clip: text;

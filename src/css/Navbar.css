@@ -53,14 +53,22 @@ header {
   left: 3.5rem;
   top: 2rem;
   font-size: 2rem;
-  font-weight: bold;
-  color: white;
+  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 400;
   font-family: "Space Mono", monospace;
   z-index: 999999;
 }
 
 .navbar-logo:hover {
-  color: white;
+  background: linear-gradient(90deg, #7ffff3, #ff9cad, #c888fd, #7efbe4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 400;
+  font-family: "Space Mono", monospace;
 }
 
 .navbar-links {
