@@ -178,7 +178,8 @@ header {
 }
 
   .navbar-glass {
-    padding: 3rem 0;
+    padding: 3rem 2rem;
+    border-radius: 0px;
   }
 
   .navbar-links.open {
