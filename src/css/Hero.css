@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap');
+
+.hero {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.hero .text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  top: 45%;
+
+  color: white;
+  text-align: center;
+  z-index: 10;
+}
+
+.hero h1,
+.hero h2 {
+  font-size: 4em; /* override for h2 below */
+  padding: 0.3rem 1rem;
+  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 400;
+}
+.hero h2 {
+  font-size: 2em;
+  margin-top: 1rem;
+}
+.hero canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  position: absolute;
+  inset: 0;
+  background-color: #000000;
+}
+
+@media (max-width: 762px) {
+.hero h1 {
+  font-size: 1.9em;
+}
+
+.hero h2 {
+  font-size: 1.3em;
+}
+
+}

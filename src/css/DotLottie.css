@@ -1,0 +1,27 @@
+
+.lottie-container {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lottie-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover;
+  display: block;
+  background-color: transparent;
+}
+
+.arrow-wrapper {
+  position: absolute;
+  bottom: 1rem; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
