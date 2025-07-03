@@ -5,10 +5,31 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [smallWindow, setSmallWindow] = useState(window.innerWidth < 1000);
-  const logoRef = useRef(null); // ✅ reference for the logo
+  const logoRef = useRef(null);
 
   const handleLinkClick = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(prev => !prev);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > window.innerHeight * 0.2);
+    };
+
+    const handleResize = () => {
+      setSmallWindow(window.innerWidth < 1000);
+    };
+
+    handleScroll();  // init check
+    handleResize();  // init check
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -23,15 +44,12 @@ const Navbar = () => {
         e.target.innerText = e.target.innerText
             .split("")
             .map((letter, index) => {
-              if (index < iterations) {
-                return originalText[index];
-              }
+              if (index < iterations) return originalText[index];
               return letters[Math.floor(Math.random() * 26)];
             })
             .join("");
 
         iterations += 1 / 2;
-
         if (iterations >= originalText.length) {
           clearInterval(interval);
           e.target.innerText = originalText;
@@ -48,15 +66,12 @@ const Navbar = () => {
         e.target.innerText = originalText
             .split("")
             .map((letter, index) => {
-              if (index >= iterations) {
-                return originalText[index];
-              }
+              if (index >= iterations) return originalText[index];
               return letters[Math.floor(Math.random() * 26)];
             })
             .join("");
 
         iterations -= 1 / 2;
-
         if (iterations <= 0) {
           clearInterval(interval);
           e.target.innerText = originalText;
@@ -86,7 +101,7 @@ const Navbar = () => {
             data-cursor-hover
             data-value="PIRAN"
             className="navbar-logo"
-            ref={logoRef} // ✅ attach ref
+            ref={logoRef}
         >
           PIRAN
         </a>
