@@ -6,14 +6,13 @@ import { Player } from '@lottiefiles/react-lottie-player';
 
 const Hero = () => {
   return (
-<section className="hero">
+<section className="hero" id="index">
   <div className="text">
     <h1 className='blur'>ROBERTO PIRAN AMEDI</h1>
     <h2 className='blur'>Software Engineer</h2>
   </div>
 
   <Spline scene="https://prod.spline.design/iNTfoEhQbpRiPupM/scene.splinecode" />
-
 
   <a href='#about' className="arrow-wrapper">
     <DotLottie />
