@@ -107,7 +107,7 @@ const Navbar = () => {
         </a>
         <header className={`header-absolute ${scrolled ? 'header-fixed' : ''}`}>
           <nav className={`navbar-links ${scrolled ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}>
-            <a href="#" data-cursor-link data-cursor-hover onClick={handleLinkClick}><p>01</p> // home</a>
+            <a href="#index" data-cursor-link data-cursor-hover onClick={handleLinkClick}><p>01</p> // home</a>
             <a href="#about" data-cursor-link data-cursor-hover onClick={handleLinkClick}><p>02</p> // about</a>
             <a href="#" data-cursor-link data-cursor-hover onClick={handleLinkClick}><p>03</p> // work</a>
             <a href="#" data-cursor-link data-cursor-hover onClick={handleLinkClick}><p>04</p> // contact</a>
