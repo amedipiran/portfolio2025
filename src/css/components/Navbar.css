@@ -49,25 +49,43 @@ header {
 }
 
 .navbar-logo {
+  display: flex;
+  align-items: center;
   position: absolute;
   left: 3.5rem;
   top: 2rem;
-  font-size: 2rem;
-  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 400;
-  font-family: "Space Mono", monospace;
-  z-index: 999999;
+  z-index: 1000000;
 }
 
-.navbar-logo:hover {
-  background: linear-gradient(90deg, #d7fbfa, #ffe0e0, #f0dfff, #d1fdf7);
+
+.logo-link,
+.dot {
+  font-size: 2rem;
+  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #8c9fba, #768aa8);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-weight: 400;
+  font-weight: 700;
+  font-family: "Space Mono", monospace;
+  z-index: 999999;
+  cursor: pointer;
+}
+
+.logo-link {
+  position: relative;
+}
+
+.logo-link:hover {
+  background: linear-gradient(90deg, #caf8ef, #ffb6c1, #8c9fba, #768aa8);
+
+  .dot {
+    background: linear-gradient(90deg, #caf8ef, #768aa8);
+  }
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
   font-family: "Space Mono", monospace;
 }
 

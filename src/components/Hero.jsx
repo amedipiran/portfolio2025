@@ -11,7 +11,7 @@ const Hero = () => {
     <h2 className='blur'>Software Engineer</h2>
   </div>
 
-  <Spline scene="https://prod.spline.design/iNTfoEhQbpRiPupM/scene.splinecode" />
+  <Spline scene="https://prod.spline.design/DrbgB2tMPpAEFPlM/scene.splinecode" />
 
   <a href='#about' className="arrow-wrapper">
     <DotLottie />

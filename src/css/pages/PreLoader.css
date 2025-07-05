@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: linear-gradient(
+            100deg,
+            #14212F,
+            #14212F,
+            #19324a,
+            #132928
+    );
+    background-size: 150% 150%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "space mono", monospace;
+    font-weight: 700;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    animation: animate-bg 30s ease infinite;
+
+}
+
+.light {
+    background: linear-gradient(100deg, #caf8ef, #d9afff, #a7f6e7);
+}
+
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Animate gradient */
+@keyframes animate-bg {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+svg {
+    width: 100%;
+}
+
+svg text {
+    font-size: 4em;
+    stroke-width: 2;
+
+    animation: animate-strokes 2s infinite alternate;
+}
+
+
+@keyframes animate-strokes {
+    0% {
+        stroke: white;
+        stroke-width: 3;
+        stroke-dashoffset: 100%;
+        stroke-dasharray: 100% 0;
+        fill-opacity: 0;
+    }
+    80% {
+        stroke: white;
+        stroke-dashoffset: 0;
+        stroke-dasharray: 0 100%;
+        fill-opacity: 1;
+    }
+    100% {
+        stroke: transparent;
+        stroke-width: 0;
+        fill-opacity: 1;
+    }
+}

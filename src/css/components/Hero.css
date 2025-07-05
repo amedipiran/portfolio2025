@@ -1,14 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap');
 
 .hero {
-  height: 100vh;
+  height: 120vh;
   margin: 0;
   padding: 0;
   width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: visible;
+  top: 0;
+}
 
+.hero canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  z-index: 0;
 }
 
 .hero .text {
@@ -37,13 +45,6 @@
 .hero h2 {
   font-size: 2em;
   margin-top: 1rem;
-}
-.hero canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  position: absolute;
-  inset: 0;
 }
 
 @media (max-width: 762px) {
