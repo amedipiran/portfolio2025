@@ -1,6 +1,7 @@
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+:root {
+  font-family: "Roboto", Avenir, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.87);
@@ -35,10 +36,18 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
   place-items: center;
-  background-color: #14212F;
+  background: linear-gradient(
+          100deg,
+          #14212F,
+          #14212F,
+          #19324a,
+          #132928
+  );
+  animation: animate-bg 30s ease infinite;
+  background-size: 150% 150%;
+
 }
 
 h1 {
@@ -65,4 +74,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
+@keyframes animate-bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

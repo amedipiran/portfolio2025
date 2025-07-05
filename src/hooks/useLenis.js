@@ -1,4 +1,3 @@
-// src/hooks/useLenis.js
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 
