@@ -5,13 +5,15 @@ import DotLottie from './DotLottie';
 
 const Hero = () => {
   return (
-<section className="hero gradient-bg" id="index">
+<section className="hero" id="hero">
   <div className="text">
     <h1 className='blur'>ROBERTO PIRAN AMEDI</h1>
     <h2 className='blur'>Software Engineer</h2>
   </div>
 
-  <Spline scene="https://prod.spline.design/DrbgB2tMPpAEFPlM/scene.splinecode" />
+  <Spline
+      scene="https://prod.spline.design/rql8AVMc5Gy2pknI/scene.splinecode"
+  />
 
   <a href='#about' className="arrow-wrapper">
     <DotLottie />
