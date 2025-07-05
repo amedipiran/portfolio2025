@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../css/Navbar.css';
+import '../css/components/Navbar.css';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -19,9 +19,7 @@ const Navbar = () => {
       setSmallWindow(window.innerWidth < 1000);
     };
 
-    handleScroll();  // init check
-    handleResize();  // init check
-
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
@@ -32,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const letters = "abcdefghijklmnopqrstuvxyz";
     let interval = null;
 
     const handleHover = (e) => {
@@ -41,15 +39,17 @@ const Navbar = () => {
       let iterations = 0;
 
       interval = setInterval(() => {
-        e.target.innerText = e.target.innerText
+        const newText = originalText
             .split("")
             .map((letter, index) => {
               if (index < iterations) return originalText[index];
-              return letters[Math.floor(Math.random() * 26)];
+              return letters[Math.floor(Math.random() * letters.length)];
             })
             .join("");
 
-        iterations += 1 / 2;
+        e.target.innerText = newText;
+
+        iterations += 0.5;
         if (iterations >= originalText.length) {
           clearInterval(interval);
           e.target.innerText = originalText;
@@ -63,15 +63,17 @@ const Navbar = () => {
       let iterations = originalText.length;
 
       interval = setInterval(() => {
-        e.target.innerText = originalText
+        const newText = originalText
             .split("")
             .map((letter, index) => {
               if (index >= iterations) return originalText[index];
-              return letters[Math.floor(Math.random() * 26)];
+              return letters[Math.floor(Math.random() * letters.length)];
             })
             .join("");
 
-        iterations -= 1 / 2;
+        e.target.innerText = newText;
+
+        iterations -= 0.5;
         if (iterations <= 0) {
           clearInterval(interval);
           e.target.innerText = originalText;
@@ -96,15 +98,19 @@ const Navbar = () => {
 
   return (
       <div className={`${smallWindow && scrolled ? 'navbar-glass blur' : ''}`}>
-        <a
-            href="#index"
-            data-cursor-hover
-            data-value="PIRAN"
-            className="navbar-logo"
-            ref={logoRef}
-        >
-          PIRAN
-        </a>
+        <div className="navbar-logo">
+          <a
+              href="#index"
+              data-cursor-hover
+              data-value="Piran"
+              className="logo-link"
+              ref={logoRef}
+          >
+            Piran
+          </a>
+          <span className="dot">.</span>
+        </div>
+
         <header className={`header-absolute ${scrolled ? 'header-fixed' : ''}`}>
           <nav className={`navbar-links ${scrolled ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}>
             <a href="#index" data-cursor-link data-cursor-hover onClick={handleLinkClick}><p>01</p> // home</a>

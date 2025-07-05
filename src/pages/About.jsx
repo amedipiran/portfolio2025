@@ -1,4 +1,4 @@
-import '../css/About.css';
+import '../css/pages/About.css';
 
 const About = () => {
   return (

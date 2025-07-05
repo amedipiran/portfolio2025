@@ -1,5 +1,5 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import '../css/DotLottie.css';
+import '../css/components/DotLottie.css';
 
 const DotLottie = () => {
   return (
