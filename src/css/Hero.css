@@ -44,7 +44,6 @@
   display: block;
   position: absolute;
   inset: 0;
-  background-color: #000000;
 }
 
 @media (max-width: 762px) {

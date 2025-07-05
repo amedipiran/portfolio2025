@@ -20,7 +20,6 @@ const Navbar = () => {
     };
 
     handleScroll();  // init check
-    handleResize();  // init check
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
