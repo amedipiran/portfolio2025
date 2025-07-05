@@ -5,10 +5,18 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [smallWindow, setSmallWindow] = useState(window.innerWidth < 1000);
+  const [revealed, setRevealed] = useState(false);
   const logoRef = useRef(null);
 
   const handleLinkClick = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(prev => !prev);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRevealed(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -88,15 +96,9 @@ const Navbar = () => {
   }, []);
 
   return (
-      <div className={`${smallWindow && scrolled ? 'navbar-glass blur' : ''}`}>
-        <div className="navbar-logo">
-          <a
-              href="#index"
-              data-cursor-hover
-              data-value="Piran"
-              className="logo-link"
-              ref={logoRef}
-          >
+      <div className={`${smallWindow && scrolled ? 'navbar-glass blur' : ''} ${revealed ? 'navbar-revealed' : ''}`}>
+        <div className="navbar-logo opacity link-delay-1">
+          <a href="#index" data-cursor-hover data-value="Piran" className="logo-link" ref={logoRef}>
             Piran
           </a>
           <span className="dot">.</span>
@@ -104,13 +106,21 @@ const Navbar = () => {
 
         <header className={`header-absolute ${scrolled ? 'header-fixed' : ''}`}>
           <nav className={`navbar-links ${scrolled ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}>
-            <a href="#index" data-cursor-link onClick={handleLinkClick}><p>01</p> // home</a>
-            <a href="#about" data-cursor-link onClick={handleLinkClick}><p>02</p> // about</a>
-            <a href="#" data-cursor-link onClick={handleLinkClick}><p>03</p> // work</a>
-            <a href="#" data-cursor-link onClick={handleLinkClick}><p>04</p> // contact</a>
+            <a href="#index" className="fade-in-left link-delay-1" data-cursor-link onClick={handleLinkClick}>
+              <p>01</p> // home
+            </a>
+            <a href="#about" className="fade-in-left link-delay-2" data-cursor-link onClick={handleLinkClick}>
+              <p>02</p> // about
+            </a>
+            <a href="#" className="fade-in-left link-delay-3" data-cursor-link onClick={handleLinkClick}>
+              <p>03</p> // work
+            </a>
+            <a href="#" className="fade-in-left link-delay-4" data-cursor-link onClick={handleLinkClick}>
+              <p>04</p> // contact
+            </a>
           </nav>
 
-          <div className="hamburger-container">
+          <div className={`hamburger-container fade-in-left link-delay-3`}>
             <svg
                 className={`ham hamRotate ham7 ${menuOpen ? 'active' : ''}`}
                 viewBox="0 0 100 100"
@@ -128,7 +138,7 @@ const Navbar = () => {
               <path
                   className="line bottom"
                   d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582
-       8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40"
+                  8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40"
               />
             </svg>
           </div>

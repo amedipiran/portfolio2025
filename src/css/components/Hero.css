@@ -48,6 +48,28 @@
   margin-top: 1rem;
 }
 
+/*Fade Effect*/
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.hero.revealed .fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero.revealed .delay-1 {
+  transition-delay: 0.3s;
+}
+.hero.revealed .delay-2 {
+  transition-delay: 0.6s;
+}
+.hero.revealed .delay-3 {
+  transition-delay: 0.9s;
+}
+
 @media (max-width: 762px) {
 .hero h1 {
   font-size: 1.9em;
