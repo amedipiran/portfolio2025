@@ -106,7 +106,7 @@ const Navbar = () => {
 
         <header className={`header-absolute ${scrolled ? 'header-fixed' : ''}`}>
           <nav className={`navbar-links ${scrolled ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}>
-            <a href="#index" className="fade-in-left link-delay-1" data-cursor-link onClick={handleLinkClick}>
+            <a href="#hero" className="fade-in-left link-delay-1" data-cursor-link onClick={handleLinkClick}>
               <p>01</p> // home
             </a>
             <a href="#about" className="fade-in-left link-delay-2" data-cursor-link onClick={handleLinkClick}>
