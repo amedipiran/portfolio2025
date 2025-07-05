@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../css/Cursor.css';
+import '../css/components/Cursor.css';
 
 const Cursor = () => {
   const outerRef = useRef(null);

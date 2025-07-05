@@ -1,6 +1,6 @@
 import React from 'react';
 import Spline from '@splinetool/react-spline';
-import '../css/Hero.css';
+import '../css/components/Hero.css';
 import DotLottie from './DotLottie';
 
 const Hero = () => {
