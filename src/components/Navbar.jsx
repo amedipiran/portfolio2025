@@ -44,13 +44,15 @@ const Navbar = () => {
 
   useEffect(() => {
     const letters = "abcdefghijklmnopqrstuvxyz";
-    let interval = null;
+    let animationInterval = null;
+    let scrambleInterval = null;
 
-    const handleHover = (e) => {
-      clearInterval(interval);
-      const originalText = e.target.dataset.value;
+    const handleHover = (element) => {
+      clearInterval(scrambleInterval);
+      const originalText = element.dataset.value;
       let iterations = 0;
-      interval = setInterval(() => {
+
+      scrambleInterval = setInterval(() => {
         const newText = originalText
             .split("")
             .map((letter, index) => {
@@ -58,20 +60,21 @@ const Navbar = () => {
               return letters[Math.floor(Math.random() * letters.length)];
             })
             .join("");
-        e.target.innerText = newText;
+        element.innerText = newText;
         iterations += 0.5;
         if (iterations >= originalText.length) {
-          clearInterval(interval);
-          e.target.innerText = originalText;
+          clearInterval(scrambleInterval);
+          element.innerText = originalText;
         }
       }, 50);
     };
 
-    const handleLeave = (e) => {
-      clearInterval(interval);
-      const originalText = e.target.dataset.value;
+    const handleLeave = (element) => {
+      clearInterval(scrambleInterval);
+      const originalText = element.dataset.value;
       let iterations = originalText.length;
-      interval = setInterval(() => {
+
+      scrambleInterval = setInterval(() => {
         const newText = originalText
             .split("")
             .map((letter, index) => {
@@ -79,27 +82,34 @@ const Navbar = () => {
               return letters[Math.floor(Math.random() * letters.length)];
             })
             .join("");
-        e.target.innerText = newText;
+        element.innerText = newText;
         iterations -= 0.5;
         if (iterations <= 0) {
-          clearInterval(interval);
-          e.target.innerText = originalText;
+          clearInterval(scrambleInterval);
+          element.innerText = originalText;
         }
       }, 50);
     };
 
     const logo = logoRef.current;
+
     if (logo) {
-      logo.addEventListener("mouseover", handleHover);
-      logo.addEventListener("mouseleave", handleLeave);
+      logo.addEventListener("mouseover", () => handleHover(logo));
+      logo.addEventListener("mouseleave", () => handleLeave(logo));
+
+      // Trigger randomly every 10–15 seconds
+      animationInterval = setInterval(() => {
+        handleHover(logo);
+      }, 8000 + Math.random() * 2000);
     }
 
     return () => {
       if (logo) {
-        logo.removeEventListener("mouseover", handleHover);
-        logo.removeEventListener("mouseleave", handleLeave);
+        logo.removeEventListener("mouseover", () => handleHover(logo));
+        logo.removeEventListener("mouseleave", () => handleLeave(logo));
       }
-      clearInterval(interval);
+      clearInterval(scrambleInterval);
+      clearInterval(animationInterval);
     };
   }, []);
 
