@@ -120,7 +120,7 @@ const Navbar = () => {
                 data-cursor-link
                 onClick={handleLinkClick}
             >
-              <p>01</p> // home
+              <p>01</p> ./home
             </a>
             <a
                 href="#about"
@@ -128,7 +128,7 @@ const Navbar = () => {
                 data-cursor-link
                 onClick={handleLinkClick}
             >
-              <p>02</p> // about
+              <p>02</p> ./about
             </a>
             <a
                 href="#"
@@ -136,7 +136,7 @@ const Navbar = () => {
                 data-cursor-link
                 onClick={handleLinkClick}
             >
-              <p>03</p> // work
+              <p>03</p> ./work
             </a>
             <a
                 href="#"
@@ -144,7 +144,7 @@ const Navbar = () => {
                 data-cursor-link
                 onClick={handleLinkClick}
             >
-              <p>04</p> // contact
+              <p>04</p> ./contact
             </a>
           </nav>
 
