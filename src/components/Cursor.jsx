@@ -41,11 +41,8 @@ useEffect(() => {
   const handlePointerOver = (e) => {
     const link = e.target.closest('[data-cursor-link]');
     const hover = e.target.closest('[data-cursor-hover]');
-    
-    // Visa hover-effekt för inner och outer cursor
     if (hover) setHovering(true);
 
-    // Sänk opacity endast för navbar-länkar
     if (link) {
       document.querySelectorAll('[data-cursor-link]').forEach(el => {
         el.style.opacity = el === link ? '1' : '0.3';
