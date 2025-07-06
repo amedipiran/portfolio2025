@@ -27,7 +27,9 @@ const Hero = () => {
             className="fade-in-up delay-2"
         />
 
-        <a href="#about" className="arrow-wrapper fade-in-up delay-3">
+        <a href="#about"
+           data-cursor-hover
+           className="arrow-wrapper fade-in-up delay-3">
           <DotLottie />
         </a>
       </section>

@@ -128,6 +128,7 @@ const Navbar = () => {
                 href="#hero"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-1' : ''}`}
                 data-cursor-link
+                data-cursor-hover
                 onClick={handleLinkClick}
             >
               <p>01</p> ./home
@@ -136,6 +137,7 @@ const Navbar = () => {
                 href="#about"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-2' : ''}`}
                 data-cursor-link
+                data-cursor-hover
                 onClick={handleLinkClick}
             >
               <p>02</p> ./about
@@ -143,6 +145,7 @@ const Navbar = () => {
             <a
                 href="#"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-3' : ''}`}
+                data-cursor-hover
                 data-cursor-link
                 onClick={handleLinkClick}
             >
@@ -151,6 +154,7 @@ const Navbar = () => {
             <a
                 href="#"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-4' : ''}`}
+                data-cursor-hover
                 data-cursor-link
                 onClick={handleLinkClick}
             >
@@ -159,6 +163,7 @@ const Navbar = () => {
             <a
                 href="#"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-5' : ''}`}
+                data-cursor-hover
                 data-cursor-link
                 onClick={handleLinkClick}
             >
