@@ -259,7 +259,7 @@ header {
 
   .navbar-glass {
     padding: 3rem 2rem;
-    border-radius: 0px;
+    border-radius: 0;
   }
 
   .hamburger-container {
