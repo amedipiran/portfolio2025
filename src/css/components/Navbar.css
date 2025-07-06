@@ -36,6 +36,7 @@ header {
   padding: 2rem 0;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .blur {
@@ -90,7 +91,7 @@ header {
 
 .navbar-links {
   display: flex;
-  gap: 6rem;
+  gap: 3rem;
   font-family: monospace;
 }
 
@@ -215,6 +216,9 @@ header {
 }
 .navbar-revealed .link-delay-4 {
   transition-delay: 0.8s;
+}
+.navbar-revealed .link-delay-5 {
+  transition-delay: 1s;
 }
 
 @media (max-width: 1000px) {
