@@ -154,7 +154,15 @@ const Navbar = () => {
                 data-cursor-link
                 onClick={handleLinkClick}
             >
-              <p>04</p> ./contact
+              <p>04</p> ./education
+            </a>
+            <a
+                href="#"
+                className={`fade-in-left ${revealed && !animationDone ? 'link-delay-5' : ''}`}
+                data-cursor-link
+                onClick={handleLinkClick}
+            >
+              <p>05</p> ./contact
             </a>
           </nav>
 
