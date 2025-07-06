@@ -37,6 +37,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: position 0.4s ease, background-color 0.4s ease;
 }
 
 .blur {
@@ -47,6 +48,7 @@ header {
   border-radius: 0.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 999999;
+  transition: position 0.4s ease-in-out, background-color 0.4s ease-in-out;
 }
 
 .navbar-logo {
@@ -127,7 +129,7 @@ header {
   bottom: -4px;
   left: 0;
   height: 2px;
-  width: 0%;
+  width: 0;
   background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
   transition: width 0.3s ease;
 }
@@ -257,7 +259,7 @@ header {
 
   .navbar-glass {
     padding: 3rem 2rem;
-    border-radius: 0px;
+    border-radius: 0;
   }
 
   .hamburger-container {

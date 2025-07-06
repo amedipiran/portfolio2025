@@ -11,7 +11,6 @@
   border: 2px solid var(--primary-color);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
   transform: translate(-50%, -50%);
   transition: transform 0.15s ease-out, opacity 0.3s ease-out;
   opacity: 0;
@@ -28,7 +27,6 @@
   background-color: var(--primary-color);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 0.2s ease-out, background-color 0.2s, opacity 0.1s ease-out;
   opacity: 0;
