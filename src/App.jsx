@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Hero from './components/Hero';
+import Hero from './pages/Hero.jsx';
 import About from './Pages/About';
 import Cursor from './components/Cursor';
 import Navbar from './components/Navbar';

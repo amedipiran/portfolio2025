@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Spline from '@splinetool/react-spline';
-import '../css/components/Hero.css';
-import DotLottie from './DotLottie';
+import '../css/pages/Hero.css';
+import DotLottie from '../components/DotLottie.jsx';
 
 const Hero = () => {
   const [revealed, setRevealed] = useState(false);
@@ -10,7 +10,7 @@ const Hero = () => {
 
     const timer = setTimeout(() => {
       setRevealed(true);
-    }, 500);
+    }, 600);
 
     return () => clearTimeout(timer);
   }, []);
@@ -18,13 +18,13 @@ const Hero = () => {
   return (
       <section className={`hero ${revealed ? 'revealed' : ''}`} id="hero">
         <div className="text">
-          <h1 className='blur fade-in-up'>ROBERTO PIRAN AMEDI</h1>
-          <h2 className='blur fade-in-up delay-1'>Software Engineer</h2>
+          <h1 className='hero-blur fade-in-up delay-1'>ROBERTO PIRAN AMEDI</h1>
+          <h2 className='hero-blur fade-in-up delay-2'>Software Engineer</h2>
         </div>
 
         <Spline
             scene="https://prod.spline.design/rql8AVMc5Gy2pknI/scene.splinecode"
-            className="fade-in-up delay-2"
+            className="fade-in-up "
         />
 
         <a href="#about"
