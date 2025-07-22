@@ -14,7 +14,8 @@ const Education = () => {
                 if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
                 const data = await response.json();
 
-                const formattedCourses = Object.entries(data || {}).map(([id, course]) => ({
+                const educationData = data.education || {};
+                const formattedCourses = Object.entries(educationData).map(([id, course]) => ({
                     id,
                     ...course,
                 }));
