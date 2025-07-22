@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import useLenis from './hooks/useLenis';
 import 'lenis/dist/lenis.css';
 import PreLoader from './pages/PreLoader.jsx';
+import Experience from "./pages/Experience.jsx";
 
 function App() {
     useLenis();
@@ -52,6 +53,7 @@ function App() {
                 <>
                     <Hero />
                     <About />
+                    <Experience />
                     <Cursor />
                     <Navbar />
                 </>
