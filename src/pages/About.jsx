@@ -10,7 +10,7 @@ const words = [
     "Hi! 👋",
     "I'm Piran.",
     "I'm a recently graduated ",
-    "software developer.",
+    "Software Engineer.",
     "I enjoy building full-stack applications.",
     "I'm curious,",
     "driven,",
@@ -35,7 +35,7 @@ const About = () => {
                 pin: true,
                 scrub: 1,
                 anticipatePin: 1,
-                markers: true,
+                markers: false,
                 pinSpacing: true,
                 onLeave: () => {
                     containerRef.current.classList.add('unpin-collapse');

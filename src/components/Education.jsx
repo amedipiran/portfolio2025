@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../css/components/Education.css';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Education = () => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [openSemesters, setOpenSemesters] = useState({});
+
+    const semesterRefs = useRef([]);
+    semesterRefs.current = []; // Reset on each render
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -30,6 +37,30 @@ const Education = () => {
 
         fetchCourses();
     }, []);
+
+    useEffect(() => {
+        semesterRefs.current.forEach((el, i) => {
+            const direction = i % 2 === 0 ? -100 : 100;
+
+            gsap.fromTo(
+                el,
+                { x: direction, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        end: 'top 50%',
+                        scrub: 1,
+                        toggleActions: 'play none none reverse',
+                    },
+                }
+            );
+        });
+    }, [courses]);
 
     const toggleSemester = (semester) => {
         setOpenSemesters((prev) => ({
@@ -69,11 +100,15 @@ const Education = () => {
 
                     return bSem.seasonValue - aSem.seasonValue;
                 })
-                .map(([semester, semesterCourses]) => {
+                .map(([semester, semesterCourses], i) => {
                     const sortedCourses = semesterCourses.sort((a, b) => b.date?.seconds - a.date?.seconds);
 
                     return (
-                        <div key={semester} className="accordion-block">
+                        <div
+                            key={semester}
+                            className="accordion-block"
+                            ref={(el) => el && (semesterRefs.current[i] = el)}
+                        >
                             <button data-cursor-hover className="semester-toggle" onClick={() => toggleSemester(semester)}>
                                 <span className="semester-title">{semester}</span>
                                 <span className="toggle-icon">{openSemesters[semester] ? '−' : '+'}</span>
@@ -94,8 +129,8 @@ const Education = () => {
                                                 <p>
                                                     {tags.map((tag) => (
                                                         <span key={tag} className="tag">
-                              #{tag}
-                            </span>
+                                                            #{tag}
+                                                        </span>
                                                     ))}
                                                 </p>
                                             )}
