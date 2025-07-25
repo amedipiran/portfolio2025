@@ -27,3 +27,29 @@
     transition: opacity 0.3s ease;
     white-space: nowrap;
 }
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 100px 20px;
+    }
+
+    .hero-text {
+        width: 100%;
+        gap: 0.4rem;
+    }
+
+    .hero-word {
+        font-size: 1.4rem;
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        padding: 80px 15px;
+    }
+
+    .hero-word {
+        font-size: 1.2rem;
+    }
+}
