@@ -107,8 +107,7 @@ const Education = () => {
                         <div
                             key={semester}
                             className="accordion-block"
-                            ref={(el) => el && (semesterRefs.current[i] = el)}
-                        >
+                            ref={(el) => el && (semesterRefs.current[i] = el)}>
                             <button data-cursor-hover className="semester-toggle" onClick={() => toggleSemester(semester)}>
                                 <span className="semester-title">{semester}</span>
                                 <span className="toggle-icon">{openSemesters[semester] ? '−' : '+'}</span>
@@ -124,7 +123,7 @@ const Education = () => {
                                                 <small> ({credits} hp)</small>
                                             </h3>
                                             <p>{description}</p>
-                                            <p>Course Code: {id}</p>
+                                            <p className={"course-code"}>Course Code: {id}</p>
                                             {tags?.length > 0 && (
                                                 <p>
                                                     {tags.map((tag) => (
