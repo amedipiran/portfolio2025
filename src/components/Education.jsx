@@ -12,7 +12,7 @@ const Education = () => {
     const [openSemesters, setOpenSemesters] = useState({});
 
     const semesterRefs = useRef([]);
-    semesterRefs.current = []; // Reset on each render
+    semesterRefs.current = [];
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -38,6 +38,8 @@ const Education = () => {
         fetchCourses();
     }, []);
 
+
+    // Animate each semester accordion block
     useEffect(() => {
         semesterRefs.current.forEach((el, i) => {
             const direction = i % 2 === 0 ? -100 : 100;
@@ -81,7 +83,23 @@ const Education = () => {
 
     return (
         <section id="education" className="education-container">
-            <h2>Education</h2>
+            <div className="education-intro" >
+                <h2 >Education</h2>
+                <p className="education-text" >
+                    Bachelor of Science in Software Engineering from{' '}
+                    <a
+                        href="https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="education-link"
+                        data-cursor-hover>
+                        Mid Sweden University (Mittuniversitetet)
+                    </a>
+                    . This program covered topics such as software design, full-stack development, databases, software testing,
+                    algorithms, agile methodologies, and distributed systems. Emphasis was placed on hands-on projects, modern tools,
+                    and collaboration in software engineering teams.
+                </p>
+            </div>
 
             {Object.entries(groupedBySemester)
                 .sort(([a], [b]) => {
@@ -123,7 +141,7 @@ const Education = () => {
                                                 <small> ({credits} hp)</small>
                                             </h3>
                                             <p>{description}</p>
-                                            <p className={"course-code"}>Course Code: {id}</p>
+                                            <p className="course-code">Course Code: {id}</p>
                                             {tags?.length > 0 && (
                                                 <p>
                                                     {tags.map((tag) => (

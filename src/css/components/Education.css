@@ -14,7 +14,21 @@
     text-align: center;
 }
 
-/* Accordion Button */
+.education-intro {
+    max-width: 850px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+    will-change: transform, opacity;
+}
+
+.education-text {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+
+
+
 button.semester-toggle {
     width: 100%;
     min-width: 300px;
@@ -70,7 +84,7 @@ button.semester-toggle {
     transition: transform 0.2s ease;
 }
 
-/* Accordion Content */
+
 .accordion-content {
     background-color: rgba(30, 30, 30, 0.4);
     backdrop-filter: blur(10px);
@@ -98,7 +112,7 @@ button.semester-toggle {
     border-left: 2px solid #888;
 }
 
-.course-code{
+.course-code {
     font-weight: bold;
 }
 
@@ -147,7 +161,6 @@ button.semester-toggle {
 
     .semester-toggle {
         font-size: 1rem;
-
     }
 
     .accordion-content.open {

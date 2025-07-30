@@ -7,27 +7,31 @@
     justify-content: center;
     padding: 150px 0;
     overflow: hidden;
+    text-align: justify;
 }
 
 .hero-text {
     width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
+    max-width: 900px;
+    line-height: 1.6;
+    text-align: justify;
+    display: block;
+    margin: 0 auto;
 }
 
 .hero-word {
+    display: inline; /* 🔄 make each word flow like normal text */
     font-size: 2rem;
     font-weight: bold;
     opacity: 0.3;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    white-space: nowrap;
+    margin-right: 0.3rem; /* 🧑‍🎨 space between words */
+    white-space: normal; /* 🔄 allow wrapping */
+    word-break: break-word;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
     .about-hero {
         padding: 100px 20px;
@@ -35,12 +39,10 @@
 
     .hero-text {
         width: 100%;
-        gap: 0.4rem;
     }
 
     .hero-word {
         font-size: 1.4rem;
-        word-break: break-word;
     }
 }
 
