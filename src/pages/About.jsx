@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import "../css/pages/About.css"
-import ProfileCard from "../components/ProfileCard.jsx";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
