@@ -20,14 +20,14 @@
 }
 
 .hero-word {
-    display: inline; /* 🔄 make each word flow like normal text */
+    display: inline;
     font-size: 2rem;
     font-weight: bold;
     opacity: 0.3;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    margin-right: 0.3rem; /* 🧑‍🎨 space between words */
-    white-space: normal; /* 🔄 allow wrapping */
+    margin-right: 0.3rem;
+    white-space: normal;
     word-break: break-word;
 }
 
