@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 import '../css/pages/Hero.css';
 import DotLottie from '../components/DotLottie.jsx';
+import Orb from "../components/Orb.jsx";
 
 const Hero = () => {
   const [revealed, setRevealed] = useState(false);
@@ -26,6 +27,15 @@ const Hero = () => {
             scene="https://prod.spline.design/rql8AVMc5Gy2pknI/scene.splinecode"
             className="fade-in-up "
         />
+
+{/*          <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+              <Orb
+                  hoverIntensity={0.5}
+                  rotateOnHover={true}
+                  hue={0}
+                  forceHoverState={false}
+              />
+          </div>*/}
 
         <a href="#about"
            data-cursor-hover
