@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import "../css/pages/About.css"
+import ProfileCard from "../components/ProfileCard.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,7 +56,9 @@ const About = () => {
     }, []);
 
     return (
-        <section id="about" className="about-hero" ref={containerRef}>
+        <section id="about">
+
+        <div className="about-hero" ref={containerRef}>
             <div className="hero-text">
                 {words.map((word, i) => (
                     <span
@@ -67,7 +70,10 @@ const About = () => {
         </span>
                 ))}
             </div>
+        </div>
+
         </section>
+
     );
 };
 
