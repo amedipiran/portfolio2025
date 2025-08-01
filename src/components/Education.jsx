@@ -10,9 +10,14 @@ const Education = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [openSemesters, setOpenSemesters] = useState({});
+    const educationTitle = "education-title"
+    const educationTitleRef = useRef(null);
+    const educationTextRef = useRef(null);
 
     const semesterRefs = useRef([]);
     semesterRefs.current = [];
+
+
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -38,6 +43,45 @@ const Education = () => {
         fetchCourses();
     }, []);
 
+    useEffect(() => {
+        if (educationTitleRef.current){
+            gsap.fromTo(
+                educationTitleRef.current,
+                {x: -20, autoAlpha: 0},
+                {
+                    x: 0,
+                    autoAlpha: 1,
+                    duration: .4,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: educationTitleRef.current,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse",
+                    }
+                }
+            )
+        }
+    })
+
+    useEffect(() => {
+        if (educationTextRef.current){
+            gsap.fromTo(educationTextRef.current,
+                {x: 20, autoAlpha: 0},
+                {
+                    x: 0,
+                    autoAlpha: 1,
+                    duration: .4,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: educationTitleRef.current,
+                        start: "top 60%",
+                        toggleActions: "play none none reverse",
+                    }
+                }
+                )
+        }
+    });
+
 
     // Animate each semester accordion block
     useEffect(() => {
@@ -54,7 +98,7 @@ const Education = () => {
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: el,
-                        start: 'top 85%',
+                        start: 'top 90%',
                         end: 'top 50%',
                         scrub: 1,
                         toggleActions: 'play none none reverse',
@@ -84,8 +128,8 @@ const Education = () => {
     return (
         <section id="education" className="education-container">
             <div className="education-intro" >
-                <h2 >Education</h2>
-                <p className="education-text" >
+                <h2 className={educationTitle} ref={educationTitleRef}>Education</h2>
+                <p className="education-text" ref={educationTextRef} >
                     Bachelor of Science in Software Engineering from{' '}
                     <a
                         href="https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB"

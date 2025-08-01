@@ -8,14 +8,14 @@ import "../css/pages/About.css"
 gsap.registerPlugin(ScrollTrigger);
 
 const words = [
-    "Hi! 👋",
-    "I'm Piran.",
+    "Hi! 👋 ",
+    "I'm Piran. ",
     "I'm a recently graduated ",
-    "Software Engineer.",
-    "I enjoy building full-stack applications.",
-    "I'm curious,",
-    "driven,",
-    "and always learning.",
+    "Software Engineer. ",
+    "I enjoy building full-stack applications. ",
+    "I'm curious, ",
+    "driven, ",
+    "and always learning. ",
     "Let's build something meaningful together.",
 ];
 
