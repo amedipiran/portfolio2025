@@ -27,8 +27,6 @@
 }
 
 
-
-
 button.semester-toggle {
     width: 100%;
     min-width: 300px;
@@ -68,9 +66,6 @@ button.semester-toggle {
     left: 100%;
 }
 
-.semester-toggle:hover {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-}
 
 .semester-toggle .semester-title {
     flex: 1;

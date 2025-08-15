@@ -31,7 +31,7 @@ const About = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: 'top+=-40% top',
+                start: 'top+=-60% top',
                 end: `+=${(words.length + 1) * 150}`,
                 pin: true,
                 scrub: 1,

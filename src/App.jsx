@@ -7,6 +7,7 @@ import useLenis from './hooks/useLenis';
 import 'lenis/dist/lenis.css';
 import PreLoader from './pages/PreLoader.jsx';
 import Experience from "./pages/Experience.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
     useLenis();
@@ -56,6 +57,7 @@ function App() {
                     <Experience />
                     <Cursor />
                     <Navbar />
+                    <Footer />
                 </>
             )}
         </>
