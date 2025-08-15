@@ -31,7 +31,6 @@
     word-break: break-word;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
     .about-hero {
         padding: 100px 20px;
