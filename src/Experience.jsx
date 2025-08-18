@@ -1,4 +1,4 @@
-import Education from "../components/Education.jsx";
+import Education from "./components/Education.jsx";
 
 const Experience = () => {
     return (

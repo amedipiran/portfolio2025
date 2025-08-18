@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import Hero from './pages/Hero.jsx';
-import About from './Pages/About';
+import Hero from './Hero.jsx';
+import About from './About.jsx';
 import Cursor from './components/Cursor';
 import Navbar from './components/Navbar';
 import useLenis from './hooks/useLenis';
 import 'lenis/dist/lenis.css';
-import PreLoader from './pages/PreLoader.jsx';
-import Experience from "./pages/Experience.jsx";
+import PreLoader from './PreLoader.jsx';
+import Experience from "./Experience.jsx";
 import Footer from "./components/Footer.jsx";
 
 function App() {

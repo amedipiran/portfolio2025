@@ -8,6 +8,15 @@
     padding: 150px 0;
     overflow: hidden;
     text-align: justify;
+    background: linear-gradient(
+            to bottom,
+            rgb(13, 17, 23) 0%,
+            rgba(13, 17, 23, 0.8) 40%,
+            rgba(13, 17, 23, 0) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+
 }
 
 .hero-text {
@@ -21,7 +30,7 @@
 
 .hero-word {
     display: inline;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     opacity: 0.3;
     pointer-events: none;
