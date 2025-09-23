@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Spline from '@splinetool/react-spline';
-import './css/Hero.css';
-import DotLottie from './components/DotLottie.jsx';
-import Orb from "./components/Orb.jsx";
+import '../css/Hero.css';
+import DotLottie from './DotLottie.jsx';
+import Orb from "./Orb.jsx";
 
 const Hero = () => {
   const [revealed, setRevealed] = useState(false);

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import "./css/About.css"
+import "../css/About.css"
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,7 +31,7 @@ const About = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: 'top+=-60% top',
+                start: 'top+=-10% top',
                 end: `+=${(words.length + 1) * 150}`,
                 pin: true,
                 scrub: 1,

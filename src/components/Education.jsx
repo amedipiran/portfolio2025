@@ -126,82 +126,85 @@ const Education = () => {
     }, {});
 
     return (
-        <section id="education" className="education-container">
-            <div className="education-intro" >
-                <h2 className={educationTitle} ref={educationTitleRef}>Education</h2>
-                <p className="education-text" ref={educationTextRef} >
-                    Bachelor of Science in Software Engineering from{' '}
-                    <a
-                        href="https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="education-link"
-                        data-cursor-hover>
-                        Mid Sweden University (Mittuniversitetet)
-                    </a>
-                    . This program covered topics such as software design, full-stack development, databases, software testing,
-                    algorithms, agile methodologies, and distributed systems. Emphasis was placed on hands-on projects, modern tools,
-                    and collaboration in software engineering teams.
-                </p>
-            </div>
+        <section id="education">
+            <div className="education-container">
+                <div className="education-intro" >
+                    <h2 className={educationTitle} ref={educationTitleRef}>Education</h2>
+                    <p className="education-text" ref={educationTextRef} >
+                        Bachelor of Science in Software Engineering from{' '}
+                        <a
+                            href="https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="education-link"
+                            data-cursor-hover>
+                            Mid Sweden University (Mittuniversitetet)
+                        </a>
+                        . This program covered topics such as software design, full-stack development, databases, software testing,
+                        algorithms, agile methodologies, and distributed systems. Emphasis was placed on hands-on projects, modern tools,
+                        and collaboration in software engineering teams.
+                    </p>
+                </div>
 
-            {Object.entries(groupedBySemester)
-                .sort(([a], [b]) => {
-                    const parseSemester = (s) => {
-                        const [season, year] = s.split(' ');
-                        const seasonValue = season === 'Spring' ? 0 : 1;
-                        return { year: parseInt(year), seasonValue };
-                    };
+                {Object.entries(groupedBySemester)
+                    .sort(([a], [b]) => {
+                        const parseSemester = (s) => {
+                            const [season, year] = s.split(' ');
+                            const seasonValue = season === 'Spring' ? 0 : 1;
+                            return { year: parseInt(year), seasonValue };
+                        };
 
-                    const aSem = parseSemester(a);
-                    const bSem = parseSemester(b);
+                        const aSem = parseSemester(a);
+                        const bSem = parseSemester(b);
 
-                    if (aSem.year !== bSem.year) {
-                        return bSem.year - aSem.year;
-                    }
+                        if (aSem.year !== bSem.year) {
+                            return bSem.year - aSem.year;
+                        }
 
-                    return bSem.seasonValue - aSem.seasonValue;
-                })
-                .map(([semester, semesterCourses], i) => {
-                    const sortedCourses = semesterCourses.sort((a, b) => b.date?.seconds - a.date?.seconds);
+                        return bSem.seasonValue - aSem.seasonValue;
+                    })
+                    .map(([semester, semesterCourses], i) => {
+                        const sortedCourses = semesterCourses.sort((a, b) => b.date?.seconds - a.date?.seconds);
 
-                    return (
-                        <div
-                            key={semester}
-                            className="accordion-block"
-                            ref={(el) => el && (semesterRefs.current[i] = el)}>
-                            <button data-cursor-hover className="semester-toggle" onClick={() => toggleSemester(semester)}>
-                                <span className="semester-title">{semester}</span>
-                                <span className="toggle-icon">{openSemesters[semester] ? '−' : '+'}</span>
-                            </button>
-                            <div className={`accordion-content ${openSemesters[semester] ? 'open' : ''}`}>
-                                <ul className="course-list">
-                                    {sortedCourses.map(({ id, name, credits, description, tags, url }) => (
-                                        <li key={id} className="education-item">
-                                            <h3>
-                                                <a href={url} target="_blank" rel="noopener noreferrer">
-                                                    {name}
-                                                </a>
-                                                <small> ({credits} hp)</small>
-                                            </h3>
-                                            <p>{description}</p>
-                                            <p className="course-code">Course Code: {id}</p>
-                                            {tags?.length > 0 && (
-                                                <p>
-                                                    {tags.map((tag) => (
-                                                        <span key={tag} className="tag">
+                        return (
+                            <div
+                                key={semester}
+                                className="accordion-block"
+                                ref={(el) => el && (semesterRefs.current[i] = el)}>
+                                <button data-cursor-hover className="semester-toggle" onClick={() => toggleSemester(semester)}>
+                                    <span className="semester-title">{semester}</span>
+                                    <span className="toggle-icon">{openSemesters[semester] ? '−' : '+'}</span>
+                                </button>
+                                <div className={`accordion-content ${openSemesters[semester] ? 'open' : ''}`}>
+                                    <ul className="course-list">
+                                        {sortedCourses.map(({ id, name, credits, description, tags, url }) => (
+                                            <li key={id} className="education-item">
+                                                <h3>
+                                                    <a href={url} target="_blank" rel="noopener noreferrer">
+                                                        {name}
+                                                    </a>
+                                                    <small> ({credits} hp)</small>
+                                                </h3>
+                                                <p>{description}</p>
+                                                <p className="course-code">Course Code: {id}</p>
+                                                {tags?.length > 0 && (
+                                                    <p>
+                                                        {tags.map((tag) => (
+                                                            <span key={tag} className="tag">
                                                             #{tag}
                                                         </span>
-                                                    ))}
-                                                </p>
-                                            )}
-                                        </li>
-                                    ))}
-                                </ul>
+                                                        ))}
+                                                    </p>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+            </div>
+
         </section>
     );
 };
