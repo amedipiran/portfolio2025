@@ -1,4 +1,4 @@
-import "./css/PreLoader.css";
+import "../css/PreLoader.css";
 
 const PreLoader = ({ isHidden }) => {
     return (
