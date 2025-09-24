@@ -1,0 +1,216 @@
+.phone-card {
+    display: flex;
+    justify-content: center;
+    perspective: 1200px;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.45));
+    transition: filter 300ms ease;
+}
+.phone-card:hover .phone-hover-glow{ opacity:.38; }
+
+
+.phone-link { display: inline-block; }
+
+.phone-layer { pointer-events: none; }
+.phone-layer.is-active { pointer-events: auto; }
+
+.phone-device {
+    --rx: 0deg; --ry: 0deg; --tx: 0px; --ty: 0px;
+    --inset: 10px;         /* inner bezel inset */
+    --inner-radius: 36px;  /* inner corner radius */
+    --status-h: 38px;
+    --notch-w: 80px;
+    --notch-h: 20px;
+    --icon-size: 14px;
+    --font-size: 11px;
+    --mx: 50%; --my: 50%;
+    position: relative;
+    width: 280px;
+    height: 560px;
+    transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+    transition: transform 300ms ease, filter 300ms ease;
+    will-change: transform;
+}
+
+.phone-edge-sheen{
+    position:absolute; inset:0;
+    background: radial-gradient(90% 30% at 50% -10%, rgba(255,255,255,0.14), rgba(255,255,255,0) 60%);
+    mix-blend-mode: screen;
+    opacity:0; pointer-events:none;
+    transition: opacity .25s ease;
+}
+
+.phone-card:hover .phone-edge-sheen{ opacity:.5; }
+
+.phone-hover-glow{
+    position:absolute; inset:-15%;
+    background: radial-gradient(120px 120px at var(--mx) var(--my), rgba(126,162,255,0.22), rgba(126,162,255,0) 65%);
+    mix-blend-mode: screen;
+    opacity:0; pointer-events:none;
+    transition: opacity .18s ease;
+}
+
+.phone-bezel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 42px;
+    background: #0e1117;
+    overflow: hidden;
+    box-shadow:
+            inset 0 0 0 2px rgba(255,255,255,0.06),
+            inset 0 0 0 8px #0a0d12,
+            0 8px 18px rgba(0,0,0,0.35);
+}
+.phone-bezel-gradient {
+    position: absolute;
+    inset: -2px;
+    border-radius: 44px;
+    pointer-events: none;
+    background: conic-gradient(from 20deg, #7dd3fc, #a78bfa, #f472b6, #fca5a5, #fde68a, #86efac, #7dd3fc);
+    filter: blur(10px) saturate(1.2);
+    opacity: 0.25;
+    animation: bezelSpin 9s linear infinite;
+}
+@keyframes bezelSpin { to { transform: rotate(360deg); } }
+
+/* Top bar inside bezel (thinner) */
+.phone-white {
+    position: absolute;
+    left: var(--inset);
+    right: var(--inset);
+    top: var(--inset);
+    height: var(--status-h);
+    background: #ffffff;
+    border-radius: var(--inner-radius) var(--inner-radius) 0 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    z-index: 2;
+}
+
+/* Status row with a middle spacer equal to the notch width */
+.status-bar {
+    position: relative;
+    height: var(--status-h);
+    display: grid;
+    grid-template-columns: 1fr var(--notch-w) 1fr;
+    align-items: center;
+    padding: 0 10px;
+    color: #0f172a;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    font-weight: 600;
+    font-size: var(--font-size);
+    line-height: 1;
+}
+.sb-left  { grid-column: 1; justify-self: start; letter-spacing: .2px; margin-left: 5px; }
+.sb-right { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 6px; }
+.sb-icon  { width: var(--icon-size); height: var(--icon-size); display: block; color: #0f172a; }
+
+/* Battery with percent inside the icon (no %) — scaled down */
+.sb-battery {
+    position: relative;
+    width: 26px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.sb-icon-battery { width: 26px; height: 14px; display: block; color: #0f172a; }
+.sb-battery-fill { fill: #0f172a; }
+.sb-battery-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.2px;
+    transform: translateX(-0.5px);
+}
+
+/* Notch centered over the middle column (narrower, thinner) */
+.phone-notch {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--notch-w);
+    height: var(--notch-h);
+    background: #0f0f10;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 3;
+}
+.notch-speaker {
+    width: 32px; height: 3px;
+    background: #1e293b;
+    border-radius: 3px;
+}
+.notch-camera {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #4b5563 0%, #0b0b0c 60%);
+}
+
+/* Screen sits UNDER the status bar (stacked, not hidden) */
+.phone-screen {
+    position: absolute;
+    left: var(--inset);
+    right: var(--inset);
+    bottom: var(--inset);
+    top: calc(var(--inset) + var(--status-h));
+    border-radius: 0 0 var(--inner-radius) var(--inner-radius);
+    overflow: hidden;
+    background: #000;
+    z-index: 1;
+}
+.phone-screen::before {
+    content: "";
+    position: absolute;
+    top: -6px; left: 0; right: 0; height: 6px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0));
+    pointer-events: none;
+}
+.phone-screen-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    transform: translateX(var(--tx)) translateY(var(--ty)) scale(1.00);
+    transition: transform 250ms ease, filter 300ms ease;
+    filter: grayscale(10%) contrast(1.05) saturate(1.05);
+    margin-top: 0.03rem;
+}
+
+.phone-screen-glow {
+    position: absolute; bottom: -10%; left: -10%; right: -10%; height: 50%;
+    background: radial-gradient(60% 80% at 50% 100%, rgba(126, 162, 255, 0.25), rgba(0,0,0,0) 60%);
+    pointer-events: none;
+}
+.phone-screen-glare {
+    position: absolute; inset: 0;
+    background: linear-gradient(115deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.02) 28%, rgba(255,255,255,0) 45%);
+    mix-blend-mode: screen;
+    transform: translateX(-40%);
+    animation: glareSweep 5s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes glareSweep {
+    0%, 100% { transform: translateX(-40%); opacity: 0.35; }
+    50%      { transform: translateX(40%);  opacity: 0.15; }
+}
+
+/* Side buttons */
+.side-btn {
+    position: absolute; background: #0a0d12; border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.btn-power  { right: -3px; top: 120px; width: 3px; height: 52px; }
+.btn-vol-up { left:  -3px; top: 140px; width: 3px; height: 44px; }
+.btn-vol-down{left:  -3px; top: 200px; width: 3px; height: 44px; }
+
+/* Responsive */
+@media (max-width: 1100px) { .phone-device { width: 260px; height: 520px; } }
+@media (max-width: 900px)  { .phone-device { width: 280px; height: 560px; } }
+@media (max-width: 520px)  { .phone-device { width: 240px; height: 480px; } }
+@media (max-width: 420px)  { .phone-device { width: 220px; height: 440px; } }

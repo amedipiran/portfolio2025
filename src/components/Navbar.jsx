@@ -12,27 +12,20 @@ const Navbar = () => {
   const handleLinkClick = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(prev => !prev);
 
+  // staged reveal
   useEffect(() => {
     const revealTimer = setTimeout(() => {
       setRevealed(true);
-
-      const cleanupTimer = setTimeout(() => {
-        setAnimationDone(true);
-      }, 1400);
-
+      const cleanupTimer = setTimeout(() => setAnimationDone(true), 1400);
       return () => clearTimeout(cleanupTimer);
     }, 500);
-
     return () => clearTimeout(revealTimer);
   }, []);
 
+  // scroll + resize listeners
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.2);
-    };
-    const handleResize = () => {
-      setSmallWindow(window.innerWidth < 1000);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.2);
+    const handleResize = () => setSmallWindow(window.innerWidth < 1000);
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
@@ -42,21 +35,32 @@ const Navbar = () => {
     };
   }, []);
 
+  // lock body scroll when menu is open (mobile overlay UX)
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = menuOpen ? 'hidden' : original || '';
+    return () => { document.body.style.overflow = original; };
+  }, [menuOpen]);
 
   return (
-      <div className={`${smallWindow && scrolled ? 'navbar-glass blur' : ''} ${revealed ? 'navbar-revealed' : ''}`}>
+      <div
+          className={`${smallWindow && scrolled && !menuOpen ? 'navbar-glass blur' : ''} ${revealed ? 'navbar-revealed' : ''}`}
+      >
         <div className={`navbar-logo opacity ${revealed && !animationDone ? 'link-delay-1' : ''}`}>
           <Logo />
         </div>
 
         <header className={`header-absolute ${scrolled ? 'header-fixed' : ''}`}>
-          <nav className={`navbar-links ${scrolled ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}>
+          <nav
+              className={`navbar-links ${scrolled && !smallWindow ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}
+          >
             <a
                 href="#hero"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-1' : ''}`}
                 data-cursor-link
                 data-cursor-hover
-                onClick={handleLinkClick}>
+                onClick={handleLinkClick}
+            >
               <p>01</p> ./home
             </a>
             <a
@@ -64,7 +68,8 @@ const Navbar = () => {
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-2' : ''}`}
                 data-cursor-link
                 data-cursor-hover
-                onClick={handleLinkClick}>
+                onClick={handleLinkClick}
+            >
               <p>02</p> ./about
             </a>
             <a
@@ -72,16 +77,17 @@ const Navbar = () => {
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-3' : ''}`}
                 data-cursor-hover
                 data-cursor-link
-                onClick={handleLinkClick}>
+                onClick={handleLinkClick}
+            >
               <p>03</p> ./experience
             </a>
-
             <a
                 href="#"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-4' : ''}`}
                 data-cursor-hover
                 data-cursor-link
-                onClick={handleLinkClick}>
+                onClick={handleLinkClick}
+            >
               <p>04</p> ./contact
             </a>
           </nav>
@@ -92,6 +98,7 @@ const Navbar = () => {
                 viewBox="0 0 100 100"
                 width="50"
                 onClick={toggleMenu}
+                aria-label="Toggle menu"
             >
               <path
                   className="line top"

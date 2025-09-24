@@ -1,66 +1,164 @@
+/* --- Base layout --- */
 .about-hero {
     width: 100%;
-    height: 100vh;
     color: white;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 150px 0;
+    padding: clamp(96px, 12vh, 140px) 0 100px;
     overflow: hidden;
     text-align: justify;
-    background: linear-gradient(
-            to top,
-            rgb(13, 17, 23) 0%,
-            rgba(13, 17, 23, 0.8) 40%,
-            rgba(13, 17, 23, 0) 100%
-    );
+    background: black;
     z-index: 1;
     pointer-events: none;
+    box-sizing: border-box;
+}
 
+.about-content {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+    gap: 2.5rem;
+    width: min(92%, 1200px);
+    pointer-events: none;
+    grid-template-areas: "card text";
+}
+
+.hero-card {
+    display: flex;
+    justify-content: center;
+    pointer-events: auto;
+    grid-area: card;
 }
 
 .hero-text {
-    width: 80%;
-    max-width: 900px;
-    line-height: 1.6;
-    text-align: justify;
+    position: relative;
+    pointer-events: none;
+    line-height: 1.7;
+    text-align: left !important;
     display: block;
     margin: 0 auto;
+    width: 100%;
+    max-width: 560px;
+    font-size: clamp(1.05rem, 2.2vw, 1.8rem);
+    font-weight: 400;
+    color: #e8ebef;
+    opacity: 0.95;
+    grid-area: text;
+    box-sizing: border-box;
 }
 
-.hero-word {
-    display: inline;
-    font-size: 3rem;
-    font-weight: bold;
-    opacity: 0.3;
+/* --- Card / phone --- */
+.phone-stack { position: relative; width: fit-content; height: fit-content; }
+.phone-layer { position: absolute; inset: 0; }
+.phone-layer:first-child { position: relative; }
+
+.text-stack { position: relative; min-height: 8rem; width: 100%; }
+.text-group { position: absolute; inset: 0; width: 100%; height: auto; display: block; box-sizing: border-box; }
+
+/* Default (desktop-first): narrow & long */
+.card-inner {
+    position: relative;
+
+    /* Narrower width & longer aspect on larger screens */
+    width: clamp(240px, 28vw, 360px);
+    aspect-ratio: 9 / 18;  /* longer silhouette */
+    height: auto;
+
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+    background: radial-gradient(120% 120% at 100% 0%, #2c3340 0%, #1f2430 45%, #171b24 100%);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+.card-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(140deg, rgba(255,255,255,0.06), transparent 35%, transparent);
     pointer-events: none;
-    transition: opacity 0.3s ease;
-    margin-right: 0.3rem;
-    white-space: normal;
-    word-break: break-word;
+}
+.card-inner:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45); filter: saturate(1.05); }
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(18%) contrast(1.05);
+    transition: filter 0.35s ease, transform 0.35s ease;
+    transform: scale(1.02);
+}
+.card-inner:hover .card-image { filter: grayscale(0%) contrast(1.05); transform: scale(1.05); }
+
+.card-overlay { position: absolute; bottom: 0; width: 100%; padding: 14px 14px 16px; background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.0)); color: #fff; text-align: center; letter-spacing: 0.2px; }
+.card-overlay h3 { margin: 0 0 4px 0; font-size: 1.1rem; font-weight: 700; }
+.card-overlay p { margin: 0; font-size: 0.9rem; opacity: 0.85; }
+
+.work-cards {
+    width: min(92%, 1200px);
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    pointer-events: auto;
+}
+.work-card {
+    height: 200px;
+    border-radius: 14px;
+    background: #1c212b;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
-@media (max-width: 768px) {
-    .about-hero {
-        padding: 100px 20px;
-    }
+/* ----------- Breakpoints ----------- */
 
+@media (max-width: 1100px) {
+    .about-content {
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 2rem;
+    }
     .hero-text {
-        width: 100%;
+        font-size: clamp(1rem, 2vw, 1.6rem);
+        max-width: 520px;
     }
-
-    .hero-word {
-        font-size: 1.4rem;
-    }
+    /* Slightly less long as we approach tablet */
+    .card-inner { aspect-ratio: 9 / 17; width: clamp(240px, 32vw, 380px); }
 }
 
-@media (max-width: 480px) {
-    .about-hero {
-        padding: 80px 15px;
+/* NOTE: we keep side-by-side until 768px now (no stacking at 900px) */
+/* You can still keep minor tweaks here if you want */
+@media (max-width: 900px) {
+    .hero-text { max-width: 92%; }
+    .card-inner { width: clamp(260px, 50vw, 420px); aspect-ratio: 9 / 16; }
+}
+
+/* New stack point: 768px */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr; /* stack */
+        gap: 1.5rem;
+        grid-template-areas:
+        "card"
+        "text";
     }
 
-    .hero-word {
-        font-size: 1.2rem;
-    }
+    .about-hero { padding: 68px 20px 84px; }
+
+    /* On small screens, keep the wider/taller look you liked */
+    .card-inner { width: clamp(280px, 78vw, 460px); aspect-ratio: 9 / 16; }
+
+    .hero-text  { font-size: clamp(0.98rem, 3.8vw, 1.25rem); max-width: 94%; margin: 0 auto; }
+}
+
+@media (max-width: 520px) {
+    .card-inner { width: clamp(270px, 84vw, 480px); aspect-ratio: 9 / 16; }
+    .hero-text  { font-size: clamp(0.95rem, 4.2vw, 1.15rem); }
+}
+
+@media (max-width: 420px) {
+    .card-inner { width: min(88vw, 480px); aspect-ratio: 9 / 16; }
+    .hero-text  { font-size: clamp(0.92rem, 4.4vw, 1.05rem); }
 }
