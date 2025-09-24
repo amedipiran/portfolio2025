@@ -39,13 +39,7 @@ a:hover {
 body {
   display: flex;
   place-items: center;
-  background: linear-gradient(
-          100deg,
-          #14212F,
-          #14212F,
-          #19324a,
-          #132928
-  );
+  background: black;
   animation: animate-bg 30s ease infinite;
   background-size: 150% 150%;
 

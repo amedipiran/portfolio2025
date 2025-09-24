@@ -1,4 +1,3 @@
-/* --- Base layout --- */
 .about-hero {
     width: 100%;
     color: white;
@@ -47,25 +46,20 @@
     opacity: 0.95;
     grid-area: text;
     box-sizing: border-box;
+    margin-top: 10rem;
 }
 
-/* --- Card / phone --- */
 .phone-stack { position: relative; width: fit-content; height: fit-content; }
 .phone-layer { position: absolute; inset: 0; }
 .phone-layer:first-child { position: relative; }
-
 .text-stack { position: relative; min-height: 8rem; width: 100%; }
 .text-group { position: absolute; inset: 0; width: 100%; height: auto; display: block; box-sizing: border-box; }
 
-/* Default (desktop-first): narrow & long */
 .card-inner {
     position: relative;
-
-    /* Narrower width & longer aspect on larger screens */
     width: clamp(240px, 28vw, 360px);
-    aspect-ratio: 9 / 18;  /* longer silhouette */
+    aspect-ratio: 9 / 18;
     height: auto;
-
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
@@ -74,6 +68,7 @@
     cursor: pointer;
     border: 1px solid rgba(255,255,255,0.06);
 }
+
 .card-inner::before {
     content: "";
     position: absolute;
@@ -81,6 +76,7 @@
     background: linear-gradient(140deg, rgba(255,255,255,0.06), transparent 35%, transparent);
     pointer-events: none;
 }
+
 .card-inner:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45); filter: saturate(1.05); }
 
 .card-image {
@@ -124,18 +120,15 @@
         font-size: clamp(1rem, 2vw, 1.6rem);
         max-width: 520px;
     }
-    /* Slightly less long as we approach tablet */
     .card-inner { aspect-ratio: 9 / 17; width: clamp(240px, 32vw, 380px); }
 }
 
-/* NOTE: we keep side-by-side until 768px now (no stacking at 900px) */
-/* You can still keep minor tweaks here if you want */
+
 @media (max-width: 900px) {
     .hero-text { max-width: 92%; }
     .card-inner { width: clamp(260px, 50vw, 420px); aspect-ratio: 9 / 16; }
 }
 
-/* New stack point: 768px */
 @media (max-width: 768px) {
     .about-content {
         grid-template-columns: 1fr; /* stack */
@@ -144,12 +137,8 @@
         "card"
         "text";
     }
-
     .about-hero { padding: 68px 20px 84px; }
-
-    /* On small screens, keep the wider/taller look you liked */
     .card-inner { width: clamp(280px, 78vw, 460px); aspect-ratio: 9 / 16; }
-
     .hero-text  { font-size: clamp(0.98rem, 3.8vw, 1.25rem); max-width: 94%; margin: 0 auto; }
 }
 
