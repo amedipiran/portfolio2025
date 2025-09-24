@@ -1,5 +1,9 @@
 #education {
-    background-color: rgba(13, 17, 23, 100);
+    background-color: white;
+}
+
+#education h2, p, a {
+    color: black;
 }
 
 .education-container {
@@ -39,7 +43,6 @@ button.semester-toggle {
     font-weight: 600;
     cursor: pointer;
     color: white;
-    background-color: rgba(30, 30, 30, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     backdrop-filter: blur(10px);
@@ -85,7 +88,7 @@ button.semester-toggle {
 
 
 .accordion-content {
-    background-color: rgba(30, 30, 30, 0.4);
+    background-color: rgba(0, 0, 0, 0.76);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     overflow: hidden;

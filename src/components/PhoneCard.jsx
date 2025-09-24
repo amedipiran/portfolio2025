@@ -1,9 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "../css/components/PhoneCard.css";
 import { motion, useAnimation } from "motion/react";
 
 export default function PhoneCard({
-                                      src,
+                                      src,                 // fallback image
+                                      videoSrc,            // optional video to play in screen
+                                      videoType = "video/mp4",
+                                      videoRate = 0.6,     // playback speed (1 = normal, 0.5 = half speed)
                                       alt = "preview",
                                       href,
                                       className = "",
@@ -14,8 +17,58 @@ export default function PhoneCard({
                                       onClick,
                                   }) {
     const phoneRef = useRef(null);
+    const videoRef = useRef(null);
     const floatCtrl = useAnimation();
 
+    const [useImageFallback, setUseImageFallback] = useState(!videoSrc);
+
+    // Prefer-reduced-motion -> use image
+    useEffect(() => {
+        if (!videoSrc) return;
+        const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (media.matches) setUseImageFallback(true);
+        const listener = () => setUseImageFallback(media.matches || false);
+        media.addEventListener?.("change", listener);
+        return () => media.removeEventListener?.("change", listener);
+    }, [videoSrc]);
+
+    // apply playback rate safely
+    const applyPlaybackRate = (rate) => {
+        const v = videoRef.current;
+        if (!v) return;
+        try {
+            v.defaultPlaybackRate = rate;
+            v.playbackRate = rate;
+            if (!v.paused) v.play().catch(() => {});
+        } catch {}
+    };
+
+    // video events
+    const handleVideoCanPlay = () => {
+        setUseImageFallback(false);
+        applyPlaybackRate(videoRate);
+        videoRef.current?.play().catch(() => setUseImageFallback(true));
+    };
+    const handleVideoError = () => setUseImageFallback(true);
+
+    // keep playbackRate in sync if prop changes
+    useEffect(() => {
+        if (!videoSrc || useImageFallback) return;
+        applyPlaybackRate(videoRate);
+    }, [videoRate, videoSrc, useImageFallback]);
+
+    // Safari sometimes forgets rates on tab switch
+    useEffect(() => {
+        const onVis = () => {
+            if (document.visibilityState === "visible" && videoRef.current && !useImageFallback) {
+                applyPlaybackRate(videoRate);
+            }
+        };
+        document.addEventListener("visibilitychange", onVis);
+        return () => document.removeEventListener("visibilitychange", onVis);
+    }, [videoRate, useImageFallback]);
+
+    // hover parallax
     const handleMove = (e) => {
         if (!phoneRef.current) return;
         const rect = phoneRef.current.getBoundingClientRect();
@@ -34,7 +87,6 @@ export default function PhoneCard({
         phoneRef.current.style.setProperty("--mx", `${px * 100}%`);
         phoneRef.current.style.setProperty("--my", `${py * 100}%`);
     };
-
     const handleLeave = () => {
         if (!phoneRef.current) return;
         phoneRef.current.style.setProperty("--rx", `0deg`);
@@ -45,6 +97,7 @@ export default function PhoneCard({
         phoneRef.current.style.setProperty("--my", `50%`);
     };
 
+    // floating anim
     useEffect(() => {
         if (!floating) return;
         floatCtrl.start({
@@ -52,6 +105,10 @@ export default function PhoneCard({
             transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
         });
     }, [floating, floatCtrl]);
+
+    // Always show status bar; notch follows prop
+    const showStatusBar = true;
+    const showNotch = notch;
 
     const Device = (
         <motion.div
@@ -64,33 +121,36 @@ export default function PhoneCard({
                 <div className="phone-bezel">
                     <div className="phone-bezel-gradient" />
 
+                    {/* Transparent overlay host for status bar + notch */}
                     <div className="phone-white">
-                        <div className="status-bar">
-                            <div className="sb-left">9:41</div>
-                            <div className="sb-right">
-                                <svg className="sb-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <rect x="3" y="14" width="3" height="7" rx="1"></rect>
-                                    <rect x="8" y="11" width="3" height="10" rx="1"></rect>
-                                    <rect x="13" y="8" width="3" height="13" rx="1"></rect>
-                                    <rect x="18" y="5" width="3" height="16" rx="1"></rect>
-                                </svg>
-                                <svg className="sb-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M2.1 8.6a15 15 0 0 1 19.8 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                                    <path d="M5.5 12a10.5 10.5 0 0 1 13 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                                    <path d="M9 15.2a6 6 0 0 1 6 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                                    <circle cx="12" cy="18" r="1.6" fill="currentColor"/>
-                                </svg>
-                                <div className="sb-battery">
-                                    <svg className="sb-icon-battery" viewBox="0 0 32 16" aria-hidden="true">
-                                        <rect x="1" y="3" width="26" height="10" rx="2" ry="2" fill="none" stroke="currentColor" strokeWidth="2"/>
-                                        <rect x="28" y="6" width="3" height="4" rx="1" ry="1" fill="currentColor"/>
-                                        <rect className="sb-battery-fill" x="3" y="5" width="22" height="6" rx="1"/>
+                        {showStatusBar && (
+                            <div className="status-bar">
+                                <div className="sb-left">9:41</div>
+                                <div className="sb-right">
+                                    <svg className="sb-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="14" width="3" height="7" rx="1"></rect>
+                                        <rect x="8" y="11" width="3" height="10" rx="1"></rect>
+                                        <rect x="13" y="8" width="3" height="13" rx="1"></rect>
+                                        <rect x="18" y="5" width="3" height="16" rx="1"></rect>
                                     </svg>
-                                    <span className="sb-battery-text">100</span>
+                                    <svg className="sb-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M2.1 8.6a15 15 0 0 1 19.8 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                        <path d="M5.5 12a10.5 10.5 0 0 1 13 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                        <path d="M9 15.2a6 6 0 0 1 6 0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                        <circle cx="12" cy="18" r="1.6" fill="currentColor"/>
+                                    </svg>
+                                    <div className="sb-battery">
+                                        <svg className="sb-icon-battery" viewBox="0 0 32 16" aria-hidden="true">
+                                            <rect x="1" y="3" width="26" height="10" rx="2" ry="2" fill="none" stroke="currentColor" strokeWidth="2"/>
+                                            <rect x="28" y="6" width="3" height="4" rx="1" ry="1" fill="currentColor"/>
+                                            <rect className="sb-battery-fill" x="3" y="5" width="22" height="6" rx="1"/>
+                                        </svg>
+                                        <span className="sb-battery-text">100</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {notch && (
+                        )}
+                        {showNotch && (
                             <div className="phone-notch">
                                 <span className="notch-speaker" />
                                 <span className="notch-camera" />
@@ -98,17 +158,38 @@ export default function PhoneCard({
                         )}
                     </div>
 
+                    {/* Screen (rounded, clips img/video) */}
                     <div className="phone-screen">
-                        {/* lock the image transform so it DOESN'T change on hover */}
-                        <img
-                            className="phone-screen-img"
-                            src={src}
-                            alt={alt}
-                            style={{
-                                transform: "translateX(var(--tx)) translateY(var(--ty)) scale(1.02)",
-                                transition: "transform 120ms ease, filter 140ms ease",
-                            }}
-                        />
+                        {useImageFallback ? (
+                            <img
+                                className="phone-screen-img"
+                                src={src}
+                                alt={alt}
+                                style={{
+                                    transform: "translateX(var(--tx)) translateY(var(--ty)) scale(1.02)",
+                                    transition: "transform 120ms ease, filter 140ms ease",
+                                }}
+                            />
+                        ) : (
+                            <video
+                                ref={videoRef}
+                                className="phone-screen-video"
+                                src={videoSrc}
+                                type={videoType}
+                                poster={src}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                onCanPlay={handleVideoCanPlay}
+                                onError={handleVideoError}
+                                style={{
+                                    transform: "translateX(var(--tx)) translateY(var(--ty)) scale(1.02)",
+                                    transition: "transform 120ms ease, filter 140ms ease",
+                                }}
+                            />
+                        )}
+
                         {glow && <div className="phone-screen-glow" />}
                         {glare && <div className="phone-screen-glare" />}
                         <div className="phone-hover-glow" />

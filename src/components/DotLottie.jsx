@@ -4,11 +4,11 @@ import '../css/components/DotLottie.css';
 const DotLottie = () => {
   return (
     <div className="lottie-container">
-      <DotLottieReact
-          src="https://lottie.host/ad3c33f6-b62f-476c-8be7-c32f11538aaf/hXstRcQU88.lottie"    
-          loop
-          autoplay
-      />
+        <DotLottieReact
+            src="https://lottie.host/5831daa9-03f0-4371-9956-5f47d59c7a9a/ineA8uW2Bg.lottie"
+            loop
+            autoplay
+        />
     </div>
   );
 };

@@ -1,41 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap');
 
 .hero {
-  min-height: 80rem;
-  height: 100dvh;
+  position: relative;
+  height: 100svh;
+  width: 100vw;
   margin: 0;
   padding: 0;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow-y: visible;
-  top: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
 }
 
-.hero canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
+.vanta-bg {
+  position: absolute;
+  inset: 0;
   z-index: 0;
+  pointer-events: none;
+}
+
+
+.bg-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.rays-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.45) 45%,
+          rgba(0, 0, 0, 0.75) 75%,
+          rgba(0, 0, 0, 1) 100%
+  );
 }
 
 .hero .text {
-  position: absolute;
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  top: 45%;
-  color: white;
   text-align: center;
-  z-index: 10;
+  color: white;
+  pointer-events: none;
 }
 
 .hero h1,
 .hero h2 {
-  font-size: 3.5em;
   padding: 0.3rem 1rem;
   background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
   -webkit-background-clip: text;
@@ -43,29 +80,34 @@
   color: transparent;
   font-weight: 400;
 }
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
 .hero h2 {
-  font-size: 2em;
+  font-size: clamp(1.2rem, 3.2vw, 2rem);
   margin-top: 1rem;
 }
 
-/*Fade Effect*/
+.arrow-wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: auto;
+}
+
 .hero-blur {
-  background: rgba(20, 20, 20, 0.4);
+  background: rgba(20, 20, 20, 0.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 999999;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
   opacity: 0;
-
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-
-.hero.revealed .blur {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
 
 .fade-in-up {
   opacity: 0;
@@ -73,32 +115,18 @@
   transition: opacity 1s ease, transform 1s ease, filter 1s ease;
 }
 
+
 .hero.revealed .fade-in-up {
   opacity: 1;
   transform: translateY(0);
 }
 
-.hero.revealed .delay-1 {
-  transition-delay: 0.3s;
-}
-.hero.revealed .delay-2 {
-  transition-delay: 0.6s;
-}
-.hero.revealed .delay-3 {
-  transition-delay: 0.9s;
-}
-
-.hero.revealed .delay-4 {
-  transition-delay: 2s;
-}
+.hero.revealed .delay-1 { transition-delay: 0.3s; }
+.hero.revealed .delay-2 { transition-delay: 0.6s; }
+.hero.revealed .delay-3 { transition-delay: 0.9s; }
+.hero.revealed .delay-4 { transition-delay: 1.2s; }
 
 @media (max-width: 762px) {
-.hero h1 {
-  font-size: 1.9em;
-}
-
-.hero h2 {
-  font-size: 1.3em;
-}
-
+  .hero h1 { font-size: 1.9em; }
+  .hero h2 { font-size: 1.3em; }
 }

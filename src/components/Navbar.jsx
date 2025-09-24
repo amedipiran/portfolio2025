@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleLinkClick = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(prev => !prev);
 
-  // staged reveal
+
   useEffect(() => {
     const revealTimer = setTimeout(() => {
       setRevealed(true);
@@ -22,7 +22,7 @@ const Navbar = () => {
     return () => clearTimeout(revealTimer);
   }, []);
 
-  // scroll + resize listeners
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.2);
     const handleResize = () => setSmallWindow(window.innerWidth < 1000);
@@ -35,7 +35,7 @@ const Navbar = () => {
     };
   }, []);
 
-  // lock body scroll when menu is open (mobile overlay UX)
+
   useEffect(() => {
     const original = document.body.style.overflow;
     document.body.style.overflow = menuOpen ? 'hidden' : original || '';
