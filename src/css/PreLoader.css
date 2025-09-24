@@ -4,13 +4,14 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: linear-gradient(
+/*    background: linear-gradient(
             100deg,
             #14212F,
             #14212F,
             #19324a,
             #132928
-    );
+    );*/
+    background: black;
     background-size: 150% 150%;
     display: flex;
     justify-content: center;

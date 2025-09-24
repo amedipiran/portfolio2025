@@ -180,7 +180,7 @@ const Education = () => {
                                         {sortedCourses.map(({ id, name, credits, description, tags, url }) => (
                                             <li key={id} className="education-item">
                                                 <h3>
-                                                    <a href={url} target="_blank" rel="noopener noreferrer">
+                                                    <a data-cursor-hover href={url} target="_blank" rel="noopener noreferrer">
                                                         {name}
                                                     </a>
                                                     <small> ({credits} hp)</small>
