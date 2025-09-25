@@ -1,19 +1,18 @@
 .footer {
-    background: linear-gradient(135deg, #0d1117, #161b22);
+    background: linear-gradient(135deg, #0d1117, #235461);
     color: #fff;
     padding: 28px 18px;
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
 }
 
-/* Inner wrapper */
 .footer-inner {
     display: grid;
     gap: 18px;
     align-items: center;
 }
 
-/* Logo section */
+
 .footer-top {
     display: flex;
     justify-content: flex-start;
@@ -49,12 +48,11 @@
     opacity: 0.85;
 }
 
-/* Contact buttons */
 .contact-links {
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
-    justify-content: center; /* center on mobile */
+    justify-content: center;
 }
 
 .contact-link {
@@ -72,7 +70,6 @@
     letter-spacing: 0.2px;
 }
 
-/* Glow sweep effect */
 .contact-link::before {
     content: "";
     position: absolute;
@@ -91,7 +88,6 @@
     background: rgba(0, 212, 255, 0.1);
 }
 
-/* Copyright */
 .copyright {
     font-size: 0.8rem;
     color: #aaa;

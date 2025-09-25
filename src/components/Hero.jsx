@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../css/Hero.css';
 import DotLottie from './DotLottie.jsx';
 import LightRays from './LightRays.jsx';
+import { motion } from 'framer-motion';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import TechSwiper from "./TechSwiper.jsx";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
@@ -14,8 +16,8 @@ const Hero = () => {
     const vantaInstance = useRef(null);
 
     const heroRef = useRef(null);
-    const textScrollRef = useRef(null); // GSAP scroll y
-    const textMouseRef = useRef(null);  // GSAP mouse x/y
+    const textScrollRef = useRef(null);
+    const textMouseRef = useRef(null);
 
     useEffect(() => {
         const t = setTimeout(() => setRevealed(true), 600);
@@ -137,6 +139,7 @@ const Hero = () => {
     }, []);
 
     return (
+        <>
         <section
             ref={heroRef}
             className={`hero ${revealed ? 'revealed' : ''}`}
@@ -165,10 +168,22 @@ const Hero = () => {
                 </div>
             </div>
 
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: .5, delay: 2, ease: "easeOut" }}>
+                <TechSwiper  />
+            </motion.div>
+
+
+
             <a href="#about" data-cursor-hover className="arrow-wrapper fade-in-up delay-3">
                 <DotLottie />
             </a>
         </section>
+
+        </>
+
     );
 };
 

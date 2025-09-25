@@ -27,11 +27,23 @@ html, body, main {
   box-sizing: border-box;
 }
 
+body {
+  background: black;
+  animation: animate-bg 30s ease infinite;
+  background-size: 150% 150%;
+}
+
+section {
+  margin: 0;
+  padding: 2rem 0;
+}
+
 a {
   font-weight: 500;
   color: white;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #6caae8;
 }
@@ -42,7 +54,6 @@ body {
   background: black;
   animation: animate-bg 30s ease infinite;
   background-size: 150% 150%;
-
 }
 
 h1 {

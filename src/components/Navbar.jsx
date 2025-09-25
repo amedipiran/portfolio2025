@@ -73,16 +73,25 @@ const Navbar = () => {
               <p>02</p> ./about
             </a>
             <a
-                href="#"
+                href="#education"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-3' : ''}`}
                 data-cursor-hover
                 data-cursor-link
                 onClick={handleLinkClick}
             >
-              <p>03</p> ./experience
+              <p>03</p> ./education
             </a>
             <a
-                href="#"
+                href="#experience"
+                className={`fade-in-left ${revealed && !animationDone ? 'link-delay-3' : ''}`}
+                data-cursor-hover
+                data-cursor-link
+                onClick={handleLinkClick}
+            >
+              <p>04</p> ./experience
+            </a>
+            <a
+                href="#footer"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-4' : ''}`}
                 data-cursor-hover
                 data-cursor-link

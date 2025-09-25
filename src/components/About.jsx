@@ -13,10 +13,13 @@ const slides = [
         phoneVideo: "/assets/phone/linkedin/linkedin-video.MP4",
         phoneHref: "https://se.linkedin.com/in/robertopiranamedi/",
         words: [
-            "Hi! 👋 ", "I'm Piran. ", "I'm a recently graduated ",
-            "Software Engineer. ", "I enjoy building full-stack applications. ",
+            "Hi! 👋 ", "I'm Piran. ", "I'm a graduated ",
+            "Software Engineer ",
+            "with a ",
+            "Bachelors Degree in Computer Science. ",
+            "I enjoy building full-stack applications. ",
             "I'm curious, ", "driven, ", "and always learning. ",
-            "Let's build something meaningful together.",
+            "Let's build something together.",
         ]
     },
     {
@@ -29,6 +32,26 @@ const slides = [
             "a custom site for a martial arts club. ",
             "It includes a lightweight CMS ",
             "and was built with Vue, Tailwind, Node, and MongoDB."
+        ]
+    },
+    {
+        phoneSrc: "/assets/phone/drillready/drillready.png",
+        phoneHref: "",
+        words: [
+            "Currently, ",
+            "I am developing a SaaS project called ",
+            "DrillReady. ",
+            "This platform streamlines the connection between offshore and onshore drillers, ",
+            "and is built using the MERN stack."
+        ]
+    },
+    {
+        phoneSrc: "/assets/phone/github/github.png",
+        phoneHref: "https://github.com/amedipiran",
+        words: [
+            "During my education, ",
+            "I've developed in various programming languages and techniques. ",
+            "Full detail regarding my education is visible bellow.",
         ]
     }
 ];
@@ -46,8 +69,8 @@ const About = () => {
         slides.forEach((_, si) => {
             const words = wordRefs.current[si] || [];
             words.forEach((el, wi) => gsap.set(el, { opacity: (si === 0 && wi === 0) ? 1 : 0.35 }));
-            gsap.set(phones[si], { opacity: 0, x: -20, pointerEvents: si === 0 ? 'auto' : 'none' });
-            gsap.set(groups[si],  { opacity: 0, x:  20 });
+            gsap.set(phones[si], { opacity: 0, x: -20, pointerEvents: 'none', zIndex: 1 });
+            gsap.set(groups[si], { opacity: 0, x: 20 });
         });
 
         const STEP  = 0.45;
@@ -72,7 +95,7 @@ const About = () => {
 
         tl.to(phones[0], { opacity: 1, x: 0, duration: CROSS * 0.6, ease: "none" });
         tl.to(groups[0], { opacity: 1, x: 0, duration: CROSS * 0.6, ease: "none" }, "<");
-        tl.add(() => { gsap.set(phones[0], { pointerEvents: 'auto' }); });
+        tl.set(phones[0], { pointerEvents: 'auto', zIndex: 3 }, "<");
 
         slides.forEach((_, si) => {
             const words = wordRefs.current[si];
@@ -87,16 +110,15 @@ const About = () => {
                 const next = si + 1;
 
                 tl.to(phones[si], { opacity: 0, x: -20, duration: CROSS * 0.6, ease: "none" }, `+=0.25`);
-                tl.to(groups[si], { opacity: 0, x:  20, duration: CROSS * 0.6, ease: "none" }, "<");
+                tl.to(groups[si], { opacity: 0, x: 20, duration: CROSS * 0.6, ease: "none" }, "<");
 
-                tl.add(() => {
-                    const nextWords = wordRefs.current[next] || [];
-                    nextWords.forEach((el, wi) => gsap.set(el, { opacity: wi === 0 ? 1 : 0.35 }));
-                    gsap.set(phones[next], { opacity: 0, x: -20 });
-                    gsap.set(groups[next], { opacity: 0, x:  20 });
-                    gsap.set(phones[si],   { pointerEvents: 'none' });
-                    gsap.set(phones[next], { pointerEvents: 'auto' });
-                });
+                const nextWords = wordRefs.current[next] || [];
+                tl.set(nextWords, { opacity: 0.35 });
+                if (nextWords[0]) tl.set(nextWords[0], { opacity: 1 });
+
+                tl.set(phones[next], { opacity: 0, x: -20, pointerEvents: 'auto', zIndex: 3 });
+                tl.set(groups[next], { opacity: 0, x: 20 });
+                tl.set(phones[si],   { pointerEvents: 'none', zIndex: 1 });
 
                 tl.to({}, { duration: CROSS * 0.1 });
 
@@ -105,12 +127,10 @@ const About = () => {
             }
         });
 
-        {
-            const last = slides.length - 1;
-            tl.to(phones[last], { opacity: 0, x: -20, duration: CROSS * 0.6, ease: "none" }, "+=0.25");
-            tl.to(groups[last], { opacity: 0, x:  20, duration: CROSS * 0.6, ease: "none" }, "<");
-            tl.add(() => { gsap.set(phones[last], { pointerEvents: 'none' }); });
-        }
+        const last = slides.length - 1;
+        tl.to(phones[last], { opacity: 0, x: -20, duration: CROSS * 0.6, ease: "none" }, "+=0.25");
+        tl.to(groups[last], { opacity: 0, x: 20, duration: CROSS * 0.6, ease: "none" }, "<");
+        tl.set(phones[last], { pointerEvents: 'none', zIndex: 1 });
     }, []);
 
     return (
@@ -118,7 +138,7 @@ const About = () => {
             <div className="about-hero" ref={containerRef}>
                 <div className="about-content">
                     <div className="hero-card">
-                        <div data-cursor-hover className="phone-stack">
+                        <div className="phone-stack">
                             {slides.map((s, si) => (
                                 <div
                                     key={si}
@@ -126,12 +146,11 @@ const About = () => {
                                     ref={(el) => (phoneRefs.current[si] = el)}
                                 >
                                     <PhoneCard
-                                        src={s.phoneSrc}              // fallback image
-                                        videoSrc={s.phoneVideo}       // optional video
+                                        src={s.phoneSrc}
+                                        videoSrc={s.phoneVideo}
                                         alt="phone preview"
                                         href={s.phoneHref}
                                         floating
-                                        /* notch/status bar will be shown only when falling back to image */
                                         notch
                                         glow
                                         glare

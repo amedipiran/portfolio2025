@@ -1,0 +1,286 @@
+#experience {
+    background: #fff;
+    border-radius: 0 0 20px 20px;
+}
+
+.experience-section a { color: #111; }
+
+.experience-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 5rem;
+    box-sizing: border-box;
+}
+
+.experience-intro {
+    text-align: center;
+    margin-bottom: 2.2rem;
+}
+
+.experience-title {
+    margin: 0;
+    font-size: clamp(1.75rem, 3.6vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: .2px;
+    line-height: 1.15;
+    background: linear-gradient(90deg, #000000, #000000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: brightness(1.25);
+}
+
+.experience-divider {
+    width: 100%;
+    height: 1px;
+    margin: 14px auto 18px;
+    background: linear-gradient(90deg, rgba(0,0,0,0), rgba(12,216,255,.6), rgba(255,0,59,.6), rgba(0,0,0,0));
+}
+
+.experience-lead {
+    margin: 0 auto;
+    max-width: 780px;
+    text-align: center;
+    color: #111;
+    opacity: .85;
+    font-size: clamp(.98rem, 1.8vw, 1.05rem);
+    line-height: 1.65;
+}
+
+/* Timeline */
+.xp-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid #e5e7eb;
+}
+
+.xp-item {
+    margin: 0 0 18px 0;
+    padding: 0 0 0 1rem;
+    position: relative;
+}
+
+.xp-item::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: .4rem;
+    width: 10px;
+    height: 10px;
+    background: #111;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    box-shadow: 0 0 0 2px #111;
+}
+
+.xp-meta {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+    font-size: .84rem;
+    color: #4b5563;
+    margin-bottom: .25rem;
+}
+
+.xp-dates {
+    font-weight: 600;
+    color: #111;
+}
+
+.xp-role {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: .2px;
+    color: #111;
+}
+
+.xp-company {
+    margin: 2px 0 8px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.xp-bullets {
+    margin: 0;
+    padding-left: 1rem;
+    color: #111;
+}
+
+.xp-bullets li {
+    margin: .28rem 0;
+    line-height: 1.55;
+}
+
+/* Subsection */
+.xp-subsection {
+    margin-top: 2.2rem;
+}
+
+.xp-subtitle {
+    margin: 0 0 .75rem 0;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: .25px;
+    background: linear-gradient(90deg, #0cd8ff, #ff003b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.xp-compact { border-left-color: #ececec; }
+.xp-compact .xp-item::before { box-shadow: 0 0 0 2px #333; }
+
+.xp-item:hover .xp-role,
+.xp-item:hover .xp-company {
+    color: #0ea5e9; /* cyan-ish accent */
+}
+
+@media (max-width: 900px) {
+    .experience-container {
+        padding: 1.75rem 1.25rem 4rem;
+        max-width: 840px;
+    }
+
+    .experience-lead {
+        max-width: 680px;
+        line-height: 1.6;
+    }
+
+    .xp-timeline {
+        border-left-width: 1.5px;
+    }
+    .xp-item {
+        padding-left: 0.9rem;
+        margin-bottom: 16px;
+    }
+    .xp-item::before {
+        left: -6px;
+        top: 0.35rem;
+        width: 9px;
+        height: 9px;
+        box-shadow: 0 0 0 1.5px #111;
+    }
+
+    .xp-role { font-size: 1rem; }
+    .xp-company { margin: 2px 0 6px; }
+    .xp-bullets { padding-left: 0.9rem; }
+}
+
+/* Phones (portrait) */
+@media (max-width: 640px) {
+    .experience-container {
+        padding: 1.25rem 1rem 3.25rem;
+    }
+
+    .experience-intro {
+        margin-bottom: 1.6rem;
+    }
+
+    .experience-title {
+        font-size: clamp(1.5rem, 6.2vw, 1.9rem);
+        line-height: 1.2;
+    }
+
+    .experience-divider {
+        margin: 10px auto 12px;
+    }
+
+    .experience-lead {
+        max-width: 92%;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        opacity: 0.9;
+    }
+
+    .xp-timeline {
+        border-left: 1.5px solid #e8e9ee;
+    }
+
+    .xp-item {
+        padding-left: 0.8rem;
+        margin-bottom: 14px;
+    }
+
+    .xp-item::before {
+        left: -5px;
+        top: 0.3rem;
+        width: 8px;
+        height: 8px;
+        border-width: 1.5px;
+        box-shadow: 0 0 0 1.5px #111;
+    }
+
+    .xp-meta {
+        gap: 0.45rem;
+        font-size: 0.82rem;
+    }
+
+    .xp-role {
+        font-size: 0.98rem;
+        letter-spacing: 0.1px;
+    }
+
+    .xp-company {
+        margin: 2px 0 6px;
+        font-size: 0.92rem;
+    }
+
+    .xp-bullets {
+        padding-left: 0.85rem;
+    }
+
+    .xp-bullets li {
+        margin: 0.24rem 0;
+        line-height: 1.5;
+    }
+
+    .xp-subsection {
+        margin-top: 1.8rem;
+    }
+
+    .xp-subtitle {
+        font-size: 0.96rem;
+        letter-spacing: 0.2px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+    .experience-container {
+        padding: 1rem 0.85rem 3rem;
+    }
+
+    .experience-lead {
+        font-size: 0.92rem;
+        line-height: 1.5;
+    }
+
+    .xp-item {
+        padding-left: 0.7rem;
+        margin-bottom: 12px;
+    }
+
+    .xp-item::before {
+        left: -5px;
+        width: 7px;
+        height: 7px;
+    }
+
+    .xp-meta {
+        font-size: 0.8rem;
+    }
+
+    .xp-role { font-size: 0.95rem; }
+    .xp-company { font-size: 0.9rem; }
+    .xp-bullets { padding-left: 0.8rem; }
+}
+
+/* Reduce hover color shift on touch devices (optional nicety) */
+@media (hover: none) {
+    .xp-item:hover .xp-role,
+    .xp-item:hover .xp-company {
+        color: #111;
+    }
+}

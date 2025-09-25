@@ -1,0 +1,126 @@
+.tech-swiper-section {
+    position: absolute;
+    left: 0;
+    bottom: 12.5rem;
+    width: 100%;
+    z-index: 3;
+    pointer-events: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.tech-swiper-heading {
+    max-width: 820px;
+    margin: 0 auto 16px;
+    text-align: center;
+}
+
+
+.tech-swiper-heading h2 {
+    margin: 0 0 4px 0;
+    font-size: clamp(1.1rem, 2.1vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: .3px;
+    background: linear-gradient(90deg, #caf8ef, #ffb6c1, #d9afff, #a7f6e7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.tech-swiper-heading p {
+    margin: 0;
+    font-size: .9rem;
+}
+
+/* Narrower track */
+.tech-swiper {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* Slides */
+.tech-slide {
+    display: flex;
+    align-items: center;
+    height: auto;
+}
+
+/* Transparent cards */
+.tech-card {
+    width: 100%;
+    height: 92px;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    justify-items: center;
+    padding: 10px 6px 8px;
+    position: relative;
+    overflow: visible;
+    transition: transform .22s ease, box-shadow .22s ease;
+    cursor: grab;
+}
+
+.tech-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+}
+
+/* Logos: grayscale by default */
+.tech-logo {
+    max-width: 44px;
+    max-height: 44px;
+    width: auto;
+    height: auto;
+    display: block;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter .28s ease, transform .2s ease;
+}
+
+/* Only the hovered card’s logo gets color */
+.tech-card:hover .tech-logo {
+    filter: grayscale(0);
+    transform: scale(1.05);
+}
+
+/* Label */
+.tech-label {
+    margin-top: 6px;
+    font-size: .82rem;
+    letter-spacing: .2px;
+    color: #e6eef6;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+
+/* Swiper pagination dots */
+.swiper-pagination-bullet {
+    background: rgba(255,255,255,0.35);
+}
+.swiper-pagination-bullet-active {
+    background: #00d4ff;
+}
+
+@media (max-width: 640px) {
+    .tech-swiper-section {
+        bottom: 10rem;
+    }
+    .tech-swiper {
+        max-width: 92%;
+    }
+    .tech-card { height: 82px; padding: 8px 4px 6px; }
+    .tech-logo {
+        max-width: 36px;
+        max-height: 36px;
+        filter: none !important;
+    }
+
+    .tech-label {
+        font-size: .78rem;
+    }
+}
