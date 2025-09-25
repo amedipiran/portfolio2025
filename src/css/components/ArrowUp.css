@@ -58,16 +58,8 @@
 
 @media (max-width: 600px) {
     .arrowup {
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        right: 10px;
-        bottom: 16px;
-    }
+        display: none !important;
 
-    .arrowup-icon {
-        width: 40px;
-        height: 40px;
     }
 
 }

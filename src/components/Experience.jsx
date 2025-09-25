@@ -173,18 +173,6 @@ const Experience = () => {
                         aria-hidden="true"
                     />
 
-                    <motion.p
-                        className="experience-lead"
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.6 }}
-                        transition={{ delay: 0.1 }}
-                    >
-                        I combine a full-stack engineering background with hands-on roles across tech,
-                        coaching, education and operations. The mix makes me practical, collaborative,
-                        and focused on outcomes.
-                    </motion.p>
                 </header>
 
                 <ol className="xp-timeline">

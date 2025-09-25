@@ -18,8 +18,7 @@ const slides = [
             "with a ",
             "Bachelors Degree in Computer Science. ",
             "I enjoy building full-stack applications. ",
-            "I'm curious, ", "driven, ", "and always learning. ",
-            "Let's build something together.",
+            "I'm curious, ", "driven, ", "and always learning.",
         ]
     },
     {
