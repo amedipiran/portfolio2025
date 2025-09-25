@@ -1,0 +1,73 @@
+.arrowup {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1000;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(73, 69, 69, 0.68);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.arrowup.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.arrowup::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.5), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.arrowup:hover::before {
+    transform: translateX(100%);
+}
+
+.arrowup:hover {
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.arrowup:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.arrowup-icon {
+    color: inherit;
+    width: 34px;
+    height: 34px;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .arrowup {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        right: 10px;
+        bottom: 16px;
+    }
+
+    .arrowup-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+}

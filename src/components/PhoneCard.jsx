@@ -3,10 +3,10 @@ import "../css/components/PhoneCard.css";
 import { motion, useAnimation } from "motion/react";
 
 export default function PhoneCard({
-                                      src,                 // fallback image
-                                      videoSrc,            // optional video to play in screen
+                                      src,
+                                      videoSrc,
                                       videoType = "video/mp4",
-                                      videoRate = 0.6,     // playback speed (1 = normal, 0.5 = half speed)
+                                      videoRate = 0.6,
                                       alt = "preview",
                                       href,
                                       className = "",
@@ -22,7 +22,7 @@ export default function PhoneCard({
 
     const [useImageFallback, setUseImageFallback] = useState(!videoSrc);
 
-    // Prefer-reduced-motion -> use image
+
     useEffect(() => {
         if (!videoSrc) return;
         const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -32,7 +32,7 @@ export default function PhoneCard({
         return () => media.removeEventListener?.("change", listener);
     }, [videoSrc]);
 
-    // apply playback rate safely
+
     const applyPlaybackRate = (rate) => {
         const v = videoRef.current;
         if (!v) return;
@@ -40,10 +40,12 @@ export default function PhoneCard({
             v.defaultPlaybackRate = rate;
             v.playbackRate = rate;
             if (!v.paused) v.play().catch(() => {});
-        } catch {}
+        } catch (e){
+            console.error(e);
+        }
     };
 
-    // video events
+
     const handleVideoCanPlay = () => {
         setUseImageFallback(false);
         applyPlaybackRate(videoRate);
@@ -51,13 +53,13 @@ export default function PhoneCard({
     };
     const handleVideoError = () => setUseImageFallback(true);
 
-    // keep playbackRate in sync if prop changes
+
     useEffect(() => {
         if (!videoSrc || useImageFallback) return;
         applyPlaybackRate(videoRate);
     }, [videoRate, videoSrc, useImageFallback]);
 
-    // Safari sometimes forgets rates on tab switch
+
     useEffect(() => {
         const onVis = () => {
             if (document.visibilityState === "visible" && videoRef.current && !useImageFallback) {
@@ -68,7 +70,7 @@ export default function PhoneCard({
         return () => document.removeEventListener("visibilitychange", onVis);
     }, [videoRate, useImageFallback]);
 
-    // hover parallax
+
     const handleMove = (e) => {
         if (!phoneRef.current) return;
         const rect = phoneRef.current.getBoundingClientRect();
@@ -97,7 +99,7 @@ export default function PhoneCard({
         phoneRef.current.style.setProperty("--my", `50%`);
     };
 
-    // floating anim
+
     useEffect(() => {
         if (!floating) return;
         floatCtrl.start({
@@ -106,7 +108,7 @@ export default function PhoneCard({
         });
     }, [floating, floatCtrl]);
 
-    // Always show status bar; notch follows prop
+
     const showStatusBar = true;
     const showNotch = notch;
 
@@ -121,7 +123,7 @@ export default function PhoneCard({
                 <div className="phone-bezel">
                     <div className="phone-bezel-gradient" />
 
-                    {/* Transparent overlay host for status bar + notch */}
+
                     <div className="phone-white">
                         {showStatusBar && (
                             <div className="status-bar">
@@ -158,7 +160,6 @@ export default function PhoneCard({
                         )}
                     </div>
 
-                    {/* Screen (rounded, clips img/video) */}
                     <div className="phone-screen">
                         {useImageFallback ? (
                             <img
@@ -207,8 +208,6 @@ export default function PhoneCard({
     const Wrapper = (
         <motion.div
             className={`phone-card ${className}`}
-            onMouseMove={handleMove}
-            onMouseLeave={handleLeave}
             onClick={onClick}
             initial={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.45))", opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -222,7 +221,7 @@ export default function PhoneCard({
 
     if (href) {
         return (
-            <a href={href} target="_blank" rel="noreferrer" className="phone-link">
+            <a href={href} data-cursor-hover={href ? true : undefined} target="_blank" rel="noreferrer" className={href ? "phone-link cursor-pointer" : "" }>
                 {Wrapper}
             </a>
         );

@@ -138,9 +138,6 @@ header {
   width: 100%;
 }
 
-/* ============= */
-/* Hamburger SVG */
-/* ============= */
 
 .hamburger-container {
   display: none;
@@ -186,7 +183,6 @@ header {
   stroke-dashoffset: -83px;
 }
 
-/*Fade Effect*/
 .opacity {
   opacity: 0;
   transition: opacity 1s ease, transform 1s ease;
@@ -266,7 +262,7 @@ header {
     display: flex;
     position: fixed;
     top: 2rem;
-    right: 3rem;
+    right: 1rem;
     z-index: 1000;
   }
 

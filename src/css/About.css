@@ -50,8 +50,12 @@
 }
 
 .phone-stack { position: relative; width: fit-content; height: fit-content; }
-.phone-layer { position: absolute; inset: 0; }
+.phone-layer { position: absolute; inset: 0; pointer-events: none;   z-index: 1;}
 .phone-layer:first-child { position: relative; }
+.phone-layer.is-active {
+    pointer-events: auto;
+    z-index: 3;
+}
 .text-stack { position: relative; min-height: 8rem; width: 100%; }
 .text-group { position: absolute; inset: 0; width: 100%; height: auto; display: block; box-sizing: border-box; }
 

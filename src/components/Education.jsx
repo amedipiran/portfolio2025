@@ -128,21 +128,22 @@ const Education = () => {
     return (
         <section id="education">
             <div className="education-container">
-                <div className="education-intro" >
-                    <h2 className={educationTitle} ref={educationTitleRef}>Education</h2>
-                    <p className="education-text" ref={educationTextRef} >
-                        Bachelor of Science in Software Engineering from{' '}
+                <div className="education-intro">
+                    <h2 ref={educationTitleRef}>Education</h2>
+                    <p className="education-text" ref={educationTextRef}>
+                        Bachelor of Science with a major in Computer Science (Software Engineering) from{" "}
                         <a
                             href="https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="education-link"
-                            data-cursor-hover>
+                            data-cursor-hover
+                        >
                             Mid Sweden University (Mittuniversitetet)
-                        </a>
-                        . This program covered topics such as software design, full-stack development, databases, software testing,
-                        algorithms, agile methodologies, and distributed systems. Emphasis was placed on hands-on projects, modern tools,
-                        and collaboration in software engineering teams.
+                        </a>. This program covered topics such as software design, full-stack
+                        development, databases, software testing, algorithms, agile methodologies,
+                        and distributed systems. Emphasis was placed on hands-on projects, modern
+                        tools, and collaboration in software engineering teams.
                     </p>
                 </div>
 
@@ -180,7 +181,7 @@ const Education = () => {
                                         {sortedCourses.map(({ id, name, credits, description, tags, url }) => (
                                             <li key={id} className="education-item">
                                                 <h3>
-                                                    <a data-cursor-hover href={url} target="_blank" rel="noopener noreferrer">
+                                                    <a className="edu-link" data-cursor-hover href={url} target="_blank" rel="noopener noreferrer">
                                                         {name}
                                                     </a>
                                                     <small> ({credits} hp)</small>
