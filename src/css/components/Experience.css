@@ -277,7 +277,6 @@
     .xp-bullets { padding-left: 0.8rem; }
 }
 
-/* Reduce hover color shift on touch devices (optional nicety) */
 @media (hover: none) {
     .xp-item:hover .xp-role,
     .xp-item:hover .xp-company {

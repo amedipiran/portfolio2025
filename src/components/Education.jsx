@@ -10,7 +10,6 @@ const Education = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [openSemesters, setOpenSemesters] = useState({});
-    const educationTitle = "education-title"
     const educationTitleRef = useRef(null);
     const educationTextRef = useRef(null);
 

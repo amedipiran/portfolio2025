@@ -228,7 +228,7 @@ const Experience = () => {
 
                     <ol className="xp-timeline xp-compact">
                         {placements.map((pl, i) => {
-                            const v = i % 2 === 0 ? itemRight : itemLeft; // flip for variety
+                            const v = i % 2 === 0 ? itemRight : itemLeft;
                             return (
                                 <motion.li
                                     key={i}

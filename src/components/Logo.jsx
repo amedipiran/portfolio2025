@@ -17,7 +17,6 @@ const Logo = ({
         const el = logoRef.current;
         if (!el) return;
 
-        // ensure original text is stored and visible
         el.dataset.value = text;
         el.textContent = text;
 
