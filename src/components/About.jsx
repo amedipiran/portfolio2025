@@ -9,8 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const slides = [
     {
-        phoneSrc: "/assets/phone/linkedin/profile-linkedin.png",            // fallback image
-        phoneVideo: "/assets/phone/linkedin/linkedin-video.MP4",        // <- video to play in phone
+        phoneSrc: "/assets/phone/linkedin/profile-linkedin.png",
+        phoneVideo: "/assets/phone/linkedin/linkedin-video.MP4",
         phoneHref: "https://se.linkedin.com/in/robertopiranamedi/",
         words: [
             "Hi! 👋 ", "I'm Piran. ", "I'm a recently graduated ",
@@ -21,7 +21,7 @@ const slides = [
     },
     {
         phoneSrc: "/assets/phone/primate/primate.png",
-        phoneVideo: "/assets/phone/primate/primate-video.mov",            // <- add or omit per slide
+        phoneVideo: "/assets/phone/primate/primate-video.mov",
         phoneHref: "https://www.primatelounge.se",
         words: [
             "Beyond my education, ",

@@ -69,6 +69,8 @@
   text-align: center;
   color: white;
   pointer-events: none;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
 }
 
 .hero h1,
