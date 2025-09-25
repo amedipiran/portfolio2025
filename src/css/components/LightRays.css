@@ -4,6 +4,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  pointer-events: none; /* don’t block hero interactions */
-  z-index: 0;          /* sits behind your text; adjust if layering with Spline */
+  pointer-events: none; 
+  z-index: 0;
 }

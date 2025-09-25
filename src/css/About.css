@@ -113,8 +113,6 @@
     box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
-/* ----------- Breakpoints ----------- */
-
 @media (max-width: 1100px) {
     .about-content {
         grid-template-columns: 0.95fr 1.05fr;

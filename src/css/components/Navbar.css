@@ -45,7 +45,6 @@ header {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 999999;
   transition: position 0.4s ease-in-out, background-color 0.4s ease-in-out;
@@ -239,7 +238,6 @@ header {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.5rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
@@ -255,7 +253,6 @@ header {
 
   .navbar-glass {
     padding: 3rem 2rem;
-    border-radius: 0;
   }
 
   .hamburger-container {
