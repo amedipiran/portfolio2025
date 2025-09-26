@@ -82,7 +82,7 @@ const About = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: 'top+=-10% top',
+                start: 'top+=-20% top',
                 end:   `+=${Math.round(totalDistance * 600)}`,
                 pin: true,
                 scrub: 1,
