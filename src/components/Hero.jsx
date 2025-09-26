@@ -50,7 +50,7 @@ const Hero = () => {
                 scale: 1.0,
                 scaleMobile: 1.0,
                 backgroundColor: 0x000000,
-                color: 0x1522, // your value; adjust to taste
+                color: 0x1522,
                 shininess: 35.0,
                 waveHeight: 22.0,
                 waveSpeed: 0.8,
@@ -89,7 +89,7 @@ const Hero = () => {
         tl.fromTo(
             scrollEl,
             { y: 0, opacity: 1 },
-            { y: -60, opacity: 0.92, ease: 'none' } // tweak -60 for more/less lift
+            { y: -60, opacity: 0.92, ease: 'none' }
         );
 
         return () => {
