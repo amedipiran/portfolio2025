@@ -67,7 +67,7 @@ header {
   background-clip: text;
   color: transparent;
   font-weight: 700;
-  font-family: "Space Mono", monospace;
+  font-family: "Space Mono", "Courier New", Courier, "Roboto Mono", "Menlo", "Consolas", monospace;
   z-index: 999999;
   cursor: pointer;
 }
