@@ -12,7 +12,6 @@
     z-index: 1;
     pointer-events: none;
     box-sizing: border-box;
-
 }
 
 .about-content {
@@ -23,10 +22,6 @@
     width: min(92%, 1200px);
     pointer-events: none;
     grid-template-areas: "card text";
-}
-
-.about-hero .about-content {
-    transform: translateY(-8vh);
 }
 
 .hero-card {
