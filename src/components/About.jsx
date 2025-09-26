@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import "../css/About.css";
+import "../css/components/About.css";
 import PhoneCard from "./PhoneCard.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const slides = [
     {
         phoneSrc: "/assets/phone/linkedin/profile-linkedin.png",
-        phoneVideo: "/assets/phone/linkedin/linkedin-video.MP4",
+/*        phoneVideo: "/assets/phone/linkedin/linkedin-video.MP4",*/
         phoneHref: "https://se.linkedin.com/in/robertopiranamedi/",
         words: [
             "Hi! 👋 ", "I'm Piran. ", "I'm a graduated ",
@@ -23,7 +23,7 @@ const slides = [
     },
     {
         phoneSrc: "/assets/phone/primate/primate.png",
-        phoneVideo: "/assets/phone/primate/primate-video.mov",
+/*        phoneVideo: "/assets/phone/primate/primate-video.mov",*/
         phoneHref: "https://www.primatelounge.se",
         words: [
             "Beyond my education, ",

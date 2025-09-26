@@ -71,7 +71,6 @@
   pointer-events: none;
   will-change: transform, opacity;
   transform: translate3d(0, 0, 0);
-  top: -5rem;
 }
 
 .hero h1,

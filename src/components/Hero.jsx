@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../css/Hero.css';
+import '../css/components/Hero.css';
 import DotLottie from './DotLottie.jsx';
 import LightRays from './LightRays.jsx';
 import { motion } from 'framer-motion';
