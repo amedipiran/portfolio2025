@@ -12,6 +12,12 @@ const Navbar = () => {
   const handleLinkClick = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(prev => !prev);
 
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el){
+      el.scrollIntoView({behavior: "smooth", block: "start"});
+    }
+  }
 
   useEffect(() => {
     const revealTimer = setTimeout(() => {
@@ -55,47 +61,58 @@ const Navbar = () => {
               className={`navbar-links ${scrolled && !smallWindow ? 'navbar-glass blur' : ''} ${menuOpen ? 'open' : ''}`}
           >
             <a
-                href="#hero"
+
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-1' : ''}`}
                 data-cursor-link
                 data-cursor-hover
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  scrollToSection("hero");
+                }}
             >
               <p>01</p> ./home
             </a>
             <a
-                href="#about"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-2' : ''}`}
                 data-cursor-link
                 data-cursor-hover
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  scrollToSection("about");
+                }}
             >
               <p>02</p> ./about
             </a>
             <a
-                href="#education"
                 className={`fade-in-left ${revealed && !animationDone ? 'link-delay-3' : ''}`}
                 data-cursor-hover
                 data-cursor-link
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  scrollToSection("education");
+                }}
             >
               <p>03</p> ./education
             </a>
             <a
-                href="#experience"
-                className={`fade-in-left ${revealed && !animationDone ? 'link-delay-3' : ''}`}
+                className={`fade-in-left ${revealed && !animationDone ? 'link-delay-4' : ''}`}
                 data-cursor-hover
                 data-cursor-link
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  scrollToSection("experience");
+                }}
             >
               <p>04</p> ./experience
             </a>
             <a
-                href="#footer"
-                className={`fade-in-left ${revealed && !animationDone ? 'link-delay-4' : ''}`}
+                className={`fade-in-left ${revealed && !animationDone ? 'link-delay-5' : ''}`}
                 data-cursor-hover
                 data-cursor-link
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  scrollToSection("footer");
+                }}
             >
               <p>04</p> ./contact
             </a>
