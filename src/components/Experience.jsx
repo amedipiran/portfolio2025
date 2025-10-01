@@ -153,7 +153,6 @@ const Experience = () => {
     return (
         <section id="experience" className="experience-section">
             <div className="experience-container">
-                <header className="experience-intro">
                     <motion.h2
                         className="experience-title"
                         variants={fadeUp}
@@ -173,7 +172,6 @@ const Experience = () => {
                         aria-hidden="true"
                     />
 
-                </header>
 
                 <ol className="xp-timeline">
                     {xp.map((job, i) => {
