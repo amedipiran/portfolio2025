@@ -50,12 +50,9 @@
 }
 
 .phone-stack { position: relative; width: fit-content; height: fit-content; }
-.phone-layer { position: absolute; inset: 0; pointer-events: none;   z-index: 1;}
+.phone-layer { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
 .phone-layer:first-child { position: relative; }
-.phone-layer.is-active {
-    pointer-events: auto;
-    z-index: 3;
-}
+.phone-layer.is-active { pointer-events: auto; z-index: 3; }
 .text-stack { position: relative; min-height: 8rem; width: 100%; }
 .text-group { position: absolute; inset: 0; width: 100%; height: auto; display: block; box-sizing: border-box; }
 
@@ -78,7 +75,6 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(140deg, rgba(255,255,255,0.06), transparent 35%, transparent);
-    pointer-events: none;
 }
 
 .card-inner:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45); filter: saturate(1.05); }
@@ -125,7 +121,6 @@
     .card-inner { aspect-ratio: 9 / 17; width: clamp(240px, 32vw, 380px); }
 }
 
-
 @media (max-width: 900px) {
     .hero-text { max-width: 92%; }
     .card-inner { width: clamp(260px, 50vw, 420px); aspect-ratio: 9 / 16; }
@@ -133,23 +128,43 @@
 
 @media (max-width: 768px) {
     .about-content {
-        grid-template-columns: 1fr; /* stack */
+        grid-template-columns: 1fr;
         gap: 1.5rem;
         grid-template-areas:
         "card"
         "text";
+        position: relative;
     }
     .about-hero { padding: 68px 20px 84px; }
+    .hero-card { position: relative; }
     .card-inner { width: clamp(280px, 78vw, 460px); aspect-ratio: 9 / 16; }
-    .hero-text  { font-size: clamp(0.98rem, 3.8vw, 1.25rem); max-width: 94%; margin: 0 auto; }
+    .hero-text  {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+        width: min(94vw, 460px);
+        margin: 0;
+        padding: 16px 18px;
+        background: rgba(0,0,0,0.85);
+        backdrop-filter: blur(6px) saturate(1.1);
+        border-radius: 12px;
+        line-height: 1.55;
+        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+        color: #f9fafb;
+        pointer-events: auto;
+        z-index: 5;
+        overflow: hidden;
+        white-space: normal;
+    }
 }
 
 @media (max-width: 520px) {
     .card-inner { width: clamp(270px, 84vw, 480px); aspect-ratio: 9 / 16; }
-    .hero-text  { font-size: clamp(0.95rem, 4.2vw, 1.15rem); }
+    .hero-text  { font-size: clamp(0.9rem, 4vw, 1rem); padding: 14px 16px; }
 }
 
 @media (max-width: 420px) {
     .card-inner { width: min(88vw, 480px); aspect-ratio: 9 / 16; }
-    .hero-text  { font-size: clamp(0.92rem, 4.4vw, 1.05rem); }
+    .hero-text  { font-size: clamp(0.88rem, 4.5vw, 0.95rem); border-radius: 10px; }
 }

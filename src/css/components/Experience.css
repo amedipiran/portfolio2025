@@ -12,10 +12,6 @@
     box-sizing: border-box;
 }
 
-.experience-intro {
-    text-align: center;
-    margin-bottom: 2.2rem;
-}
 
 .experience-title {
     margin: 0;
@@ -168,7 +164,6 @@
     .xp-bullets { padding-left: 0.9rem; }
 }
 
-/* Phones (portrait) */
 @media (max-width: 640px) {
     .experience-container {
         padding: 1.25rem 1rem 3.25rem;

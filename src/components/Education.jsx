@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../css/components/Education.css';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import {motion} from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,7 +83,6 @@ const Education = () => {
     });
 
 
-    // Animate each semester accordion block
     useEffect(() => {
         semesterRefs.current.forEach((el, i) => {
             const direction = i % 2 === 0 ? -100 : 100;
@@ -124,11 +124,24 @@ const Education = () => {
         return acc;
     }, {});
 
+    const dividerGrow = {
+        hidden: { scaleX: 0, transformOrigin: 'left center' },
+        visible: { scaleX: 1, transition: { duration: 0.5, ease: 'easeOut' } },
+    };
+
     return (
         <section id="education">
             <div className="education-container">
                 <div className="education-intro">
                     <h2 ref={educationTitleRef}>Education</h2>
+                    <motion.div
+                        className="experience-divider"
+                        variants={dividerGrow}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.7 }}
+                        aria-hidden="true"
+                    />
                     <p className="education-text" ref={educationTextRef}>
                         Bachelor of Science with a major in Computer Science (Software Engineering) from{" "}
                         <a
