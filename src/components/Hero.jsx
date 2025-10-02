@@ -183,11 +183,11 @@ const Hero = () => {
             </motion.div>*/}
 
 
-            <a onClick={() => {
+            <div onClick={() => {
                 scrollIntoAbout("about")
             }} data-cursor-hover className="arrow-wrapper cursor-pointer fade-in-up delay-3">
                 <DotLottie />
-            </a>
+            </div>
         </section>
 
         </>
