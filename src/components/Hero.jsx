@@ -19,6 +19,13 @@ const Hero = () => {
     const textScrollRef = useRef(null);
     const textMouseRef = useRef(null);
 
+    const scrollIntoAbout = (id) => {
+        const el = document.getElementById(id);
+                const y = el.getBoundingClientRect().top + window.scrollY;
+                const offset = 200;
+                window.scrollTo({top: y + offset, behavior: "smooth"});
+
+    }
     useEffect(() => {
         const t = setTimeout(() => setRevealed(true), 600);
         return () => clearTimeout(t);
@@ -176,10 +183,11 @@ const Hero = () => {
             </motion.div>*/}
 
 
-
-            <a href="#about" data-cursor-hover className="arrow-wrapper fade-in-up delay-3">
+            <div onClick={() => {
+                scrollIntoAbout("about")
+            }} data-cursor-hover className="arrow-wrapper cursor-pointer fade-in-up delay-3">
                 <DotLottie />
-            </a>
+            </div>
         </section>
 
         </>
