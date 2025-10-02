@@ -14,10 +14,16 @@ const Navbar = () => {
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
-    if (el){
-      el.scrollIntoView({behavior: "smooth", block: "start"});
+    if (el) {
+      if (id === "about") {
+        const y = el.getBoundingClientRect().top + window.scrollY;
+        const offset = 200;
+        window.scrollTo({ top: y + offset, behavior: "smooth" });
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-  }
+  };
 
   useEffect(() => {
     const revealTimer = setTimeout(() => {
