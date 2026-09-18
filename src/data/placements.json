@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Web Developer Intern (VFU)",
+    "company": "Webbpoolen AB",
+    "location": "Borås",
+    "duration": "6 months",
+    "bullets": ["Contributed to a CRM system using a custom PHP framework on the backend and React on the frontend."]
+  },
+  {
+    "title": "Construction Projects Intern (LIA)",
+    "company": "Sjötorps AB",
+    "location": "Katrineholm",
+    "duration": "6 months",
+    "bullets": ["Performed quantity take-offs and drawing reviews to ensure accurate inputs for projects."]
+  }
+]

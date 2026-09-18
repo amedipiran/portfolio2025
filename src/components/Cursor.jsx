@@ -1,96 +1,85 @@
-import React, { useEffect, useRef, useState } from 'react';
-import '../css/components/Cursor.css';
+import { useEffect, useRef } from 'react';
+import { gsap } from '../lib/gsap';
+import './Cursor.css';
 
-const Cursor = () => {
-  const outerRef = useRef(null);
-  const innerRef = useRef(null);
-  const [hovering, setHovering] = useState(false);
-  const hasMoved = useRef(false);
+export default function Cursor() {
+  const dot = useRef(null);
+  const ring = useRef(null);
+  const label = useRef(null);
 
-  const mouseX = useRef(0);
-  const mouseY = useRef(0);
-  const outerX = useRef(0);
-  const outerY = useRef(0);
+  useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)');
+    if (!fine.matches) return undefined;
 
-useEffect(() => {
-  const moveCursor = (e) => {
-    const { clientX, clientY } = e;
-    mouseX.current = clientX;
-    mouseY.current = clientY;
+    document.body.classList.add('has-cursor');
 
-    innerRef.current.style.left = `${clientX}px`;
-    innerRef.current.style.top = `${clientY}px`;
+    const dotX = gsap.quickTo(dot.current, 'x', { duration: 0.12, ease: 'power3.out' });
+    const dotY = gsap.quickTo(dot.current, 'y', { duration: 0.12, ease: 'power3.out' });
+    const ringX = gsap.quickTo(ring.current, 'x', { duration: 0.45, ease: 'power3.out' });
+    const ringY = gsap.quickTo(ring.current, 'y', { duration: 0.45, ease: 'power3.out' });
 
-    if (!hasMoved.current) {
-      outerRef.current.style.opacity = '1';
-      innerRef.current.style.opacity = '1';
-      hasMoved.current = true;
-    }
-  };
+    let shown = false;
+    const onMove = (e) => {
+      dotX(e.clientX);
+      dotY(e.clientY);
+      ringX(e.clientX);
+      ringY(e.clientY);
+      if (!shown) {
+        shown = true;
+        gsap.to([dot.current, ring.current], { opacity: 1, duration: 0.4 });
+      }
+    };
 
-  const animate = () => {
-    outerX.current += (mouseX.current - outerX.current) * 0.15;
-    outerY.current += (mouseY.current - outerY.current) * 0.15;
+    const setMode = (mode, text) => {
+      const r = ring.current;
+      r.dataset.mode = mode || '';
+      if (label.current) label.current.textContent = text || '';
+    };
 
-    outerRef.current.style.left = `${outerX.current}px`;
-    outerRef.current.style.top = `${outerY.current}px`;
+    const onOver = (e) => {
+      const el = e.target.closest('[data-cursor]');
+      if (!el) return;
+      setMode(el.dataset.cursor, el.dataset.cursorText);
+    };
 
-    requestAnimationFrame(animate);
-  };
+    const onOut = (e) => {
+      const el = e.target.closest('[data-cursor]');
+      if (!el) return;
+      if (e.relatedTarget && el.contains(e.relatedTarget)) return;
+      setMode('', '');
+    };
 
-  const handlePointerOver = (e) => {
-    const link = e.target.closest('[data-cursor-link]');
-    const hover = e.target.closest('[data-cursor-hover]');
-    if (hover) setHovering(true);
+    const onDown = () => gsap.to(ring.current, { scale: 0.8, duration: 0.2 });
+    const onUp = () => gsap.to(ring.current, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
+    const onLeave = () => gsap.to([dot.current, ring.current], { opacity: 0, duration: 0.3 });
+    const onEnter = () => gsap.to([dot.current, ring.current], { opacity: 1, duration: 0.3 });
 
-    if (link) {
-      document.querySelectorAll('[data-cursor-link]').forEach(el => {
-        el.style.opacity = el === link ? '1' : '0.3';
-      });
-    }
-  };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('pointerover', onOver);
+    document.addEventListener('pointerout', onOut);
+    document.addEventListener('pointerdown', onDown);
+    document.addEventListener('pointerup', onUp);
+    document.documentElement.addEventListener('mouseleave', onLeave);
+    document.documentElement.addEventListener('mouseenter', onEnter);
 
-  const handlePointerOut = (e) => {
-    const link = e.target.closest('[data-cursor-link]');
-    const hover = e.target.closest('[data-cursor-hover]');
-
-    if (hover) setHovering(false);
-
-    if (link) {
-      document.querySelectorAll('[data-cursor-link]').forEach(el => {
-        el.style.opacity = '1';
-      });
-    }
-  };
-
-  const handleClick = () => {
-    outerRef.current.classList.add('click');
-    setTimeout(() => {
-      outerRef.current.classList.remove('click');
-    }, 300);
-  };
-
-  document.addEventListener('mousemove', moveCursor);
-  document.addEventListener('pointerover', handlePointerOver);
-  document.addEventListener('pointerout', handlePointerOut);
-  document.addEventListener('mousedown', handleClick);
-
-  animate();
-
-  return () => {
-    document.removeEventListener('mousemove', moveCursor);
-    document.removeEventListener('pointerover', handlePointerOver);
-    document.removeEventListener('pointerout', handlePointerOut);
-    document.removeEventListener('mousedown', handleClick);
-  };
-}, []);
+    return () => {
+      document.body.classList.remove('has-cursor');
+      window.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerover', onOver);
+      document.removeEventListener('pointerout', onOut);
+      document.removeEventListener('pointerdown', onDown);
+      document.removeEventListener('pointerup', onUp);
+      document.documentElement.removeEventListener('mouseleave', onLeave);
+      document.documentElement.removeEventListener('mouseenter', onEnter);
+    };
+  }, []);
 
   return (
     <>
-      <div ref={outerRef} className={`cursor-outer ${hovering ? 'hover' : ''}`} />
-      <div ref={innerRef} className={`cursor-inner ${hovering ? 'hover' : ''}`} />
+      <div ref={dot} className="cursor-dot" aria-hidden="true" />
+      <div ref={ring} className="cursor-ring" aria-hidden="true">
+        <span ref={label} className="cursor-label" />
+      </div>
     </>
   );
-};
-
-export default Cursor;
+}

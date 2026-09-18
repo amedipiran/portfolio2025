@@ -1,0 +1,375 @@
+[
+  {
+    "code": "DT133G",
+    "name": "Computer Engineering (C), Independent Project for Bachelor’s Degree",
+    "semester": "Spring 2025",
+    "credits": 15,
+    "date": 1742684400,
+    "description": "Together with a classmate, we developed Pulumock, a toolkit for simplifying unit testing in Pulumi .NET. As part of our work, we created a dataset called Pulumissues by mining GitHub issues related to unit testing in Pulumi .NET. We also conducted a qualitative study with practitioners, referred to as Puluvaluations, to assess the toolkit’s effectiveness and relevance in real-world development scenarios.",
+    "tags": [
+      "Pulumi",
+      ".NET",
+      "C#",
+      "Unit Testing",
+      "Infrastructure as Code",
+      "Qualitative Study",
+      "GitHub Mining"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT133G/"
+  },
+  {
+    "code": "DT002G",
+    "name": "Applied Computer Engineering",
+    "semester": "Spring 2025",
+    "credits": 7.5,
+    "date": 1737241200,
+    "description": "Together with a classmate, we developed several reusable infrastructure-as-code templates using Pulumi in C# (.NET). We utilized NuGet template packaging to distribute and manage the templates efficiently. The project applied modern infrastructure automation practices in a modular and scalable way, following GitOps and trunk-based development workflows. We managed the project using Jira, Trello, and Kanban boards for planning and tracking progress.",
+    "tags": [
+      "pulumi",
+      "infrastructure-as-code",
+      "iac",
+      ".NET",
+      "C#",
+      "NuGet",
+      "GitOps"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT002G/"
+  },
+  {
+    "code": "DT175G",
+    "name": "Artificial Intelligence for Agents",
+    "semester": "Autumn 2024",
+    "credits": 7.5,
+    "date": 1729980000,
+    "description": "In this course, we explored core AI techniques for building intelligent agents. As a final project, we developed an agent for the strategic board game Octi, applying the Minimax algorithm to evaluate game states and make optimal decisions. The course concluded with an Octi tournament where agents competed against each other.",
+    "tags": [
+      "AI",
+      "minimax",
+      "game-theory",
+      "agents",
+      "java",
+      "zero-sum-games"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT175G/"
+  },
+  {
+    "code": "DT176G",
+    "name": "Reactive Programming",
+    "semester": "Autumn 2024",
+    "credits": 7.5,
+    "date": 1729980000,
+    "description": "In this course, we explored the reactive programming paradigm using RxJava, focusing on functional concepts like streams, immutability, and asynchronous data flows. As our final project, we developed a chatbot that maintained conversational state through reactive pipelines. The chatbot utilized operators like map, filter, and flatMap, and was designed for responsiveness and resilience using best practices from the Reactive Manifesto.",
+    "tags": [
+      "rxjava",
+      "reactive programming",
+      "functional programming",
+      "streams",
+      "chatbot",
+      "java"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT176G/"
+  },
+  {
+    "code": "DT166G",
+    "name": "Presenting New Technology",
+    "semester": "Autumn 2024",
+    "credits": "7.5",
+    "date": 1724536800,
+    "description": "In this course, we learned how to research and present new technology in computer engineering. As a final project, we conducted a literature-based study on hybrid search systems, analyzing current methods and trends. The work included academic writing, source evaluation, and a final presentation where we discussed our findings and received peer feedback.",
+    "tags": [
+      "computer-engineering",
+      "hybrid-search",
+      "literature-review",
+      "scientific-writing",
+      "academic-presentation",
+      "research-methodology"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT166G/"
+  },
+  {
+    "code": "DT187G",
+    "name": "Java II",
+    "semester": "Autumn 2024",
+    "credits": 7.5,
+    "date": 1724536800,
+    "description": "In this course, we deepened our understanding of object-oriented programming in Java by developing a paint program as a final project. The application included a graphical user interface built with AWT and Swing, and supported interactive drawing using event-driven programming. We implemented class hierarchies, interfaces, collections, exception handling, file I/O, and reusable components based on solid object-oriented principles. The course also covered 2D graphics and basic UML modeling.",
+    "tags": [
+      "java",
+      "object-oriented-programming",
+      "gui",
+      "paint-app",
+      "swing",
+      "awt",
+      "uml",
+      "file-io"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT187G/"
+  },
+  {
+    "code": "DT140G",
+    "name": "Computer Engineering (B), Independent Project for University Diploma",
+    "semester": "Spring 2024",
+    "credits": 15,
+    "date": 1711234800,
+    "description": "Completed an independent diploma-level project in computer engineering, where I developed a custom CMS for a web agency. The project involved building our own PHP-based backend framework from scratch, with JavaScript and SCSS used for the frontend. We followed agile workflows using Jira for project management, and delivered a fully functional content management system tailored to client needs.",
+    "tags": [
+      "PHP",
+      "CMS",
+      "JavaScript",
+      "SCSS",
+      "Jira",
+      "Agile"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT140G/"
+  },
+  {
+    "code": "MA140G",
+    "name": "Discrete Mathematics for Programmers",
+    "semester": "Spring 2024",
+    "credits": 7.5,
+    "date": 1711234800,
+    "description": "In this course, we acquired fundamental knowledge in discrete mathematics, focusing on topics relevant to computer science. The course covered set theory, logic, arithmetic, number theory (including modular arithmetic and the Euclidean algorithm), sequences and recursion, graphs and trees, graph algorithms, relations, and basic function theory. The aim was to develop mathematical reasoning and problem-solving skills essential for programming and algorithm design.",
+    "tags": [
+      "discrete mathematics",
+      "number theory",
+      "graph theory",
+      "logic",
+      "recursion",
+      "modular arithmetic",
+      "Euclidean algorithm",
+      "set theory",
+      "functions",
+      "relations"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/MA140G/"
+  },
+  {
+    "code": "DT191G",
+    "name": "Web Development with .NET",
+    "semester": "Spring 2024",
+    "credits": 7.5,
+    "date": 1705791600,
+    "description": "Built database-driven web applications using ASP.NET Core, MVC, and Entity Framework. Gained experience in C#, Razor, and Blazor (Server and WebAssembly). As a final project, developed a webshop with MVC architecture and SQL integration.",
+    "tags": [
+      "C#",
+      ".NET",
+      "ASP.NET Core",
+      "MVC",
+      "Entity Framework",
+      "web development",
+      "webshop project",
+      "backend"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT191G/"
+  },
+  {
+    "code": "IG021G",
+    "name": "Business Plans and Commercialization",
+    "semester": "Spring 2024",
+    "credits": 7.5,
+    "date": 1705791600,
+    "description": "Explored the fundamentals of business planning and commercialization. Focused on identifying, developing, and communicating business plans, evaluating business models, and understanding the key components of successful business strategies.",
+    "tags": [
+      "business planning",
+      "entrepreneurship",
+      "commercialization",
+      "business models",
+      "startups"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/IG021G/"
+  },
+  {
+    "code": "DT071G",
+    "name": "Programming in C#.NET",
+    "semester": "Autumn 2023",
+    "credits": "7.5",
+    "date": 1697925600,
+    "description": "Learned fundamental programming concepts using C# and the .NET platform. The course covered control structures, variables, classes, objects, file handling, and collections, with a focus on building and debugging C# applications through labs and a final project",
+    "tags": [
+      "C#",
+      ".NET",
+      "object-oriented",
+      "MVC"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT071G/"
+  },
+  {
+    "code": "DT162G",
+    "name": "JavaScript-based web development",
+    "semester": "Autumn 2023",
+    "credits": 7.5,
+    "date": 1697925600,
+    "description": "Developed web applications using JavaScript-based tools and frameworks. Worked with Node.js, NoSQL databases like MongoDB, and frontend frameworks. Gained hands-on experience in building interactive, full-featured web solutions using modern JavaScript technologies.",
+    "tags": [
+      "JavaScript",
+      "Node.js",
+      "MongoDB",
+      "NoSQL",
+      "JSON",
+      "React",
+      "Vue",
+      "Next.js"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT162G/"
+  },
+  {
+    "code": "DT193G",
+    "name": "Fullstack Development with Frameworks",
+    "semester": "Autumn 2023",
+    "credits": 7.5,
+    "date": 1692482400,
+    "description": "Learned to develop and deploy full stack web applications using modern frontend frameworks and Laravel for the backend. Gained insight into current development trends, created responsive interfaces, built server-side logic, and implemented client-server communication. Deployed full stack apps to hosting platforms.",
+    "tags": [
+      "full stack",
+      "frontend",
+      "backend",
+      "Laravel",
+      "frameworks"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT193G/"
+  },
+  {
+    "code": "IK060G",
+    "name": "Project Management",
+    "semester": "Autumn 2023",
+    "credits": 7.5,
+    "date": 1692482400,
+    "description": "Introduced the fundamentals of project management with a focus on system development. Explored project phases, roles, planning, resource allocation, group processes, and IT tools. Applied project methodologies to analyze real-world system development projects.",
+    "tags": [
+      "project management",
+      "system development",
+      "agile",
+      "planning",
+      "project methodology"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/IK060G/"
+  },
+  {
+    "code": "DT197G",
+    "name": "Web Design for CMS",
+    "semester": "Spring 2023",
+    "credits": 7.5,
+    "date": 1679785200,
+    "description": "Learned to create web design and graphics for CMS-based websites using design documents, HTML, CSS, and JavaScript. Installed and customized themes in a CMS, optimized content for SEO, and built responsive, accessible websites adaptable across devices.",
+    "tags": [
+      "wordpress",
+      "CMS",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "SEO",
+      "PHP"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT197G/"
+  },
+  {
+    "code": "DT173G",
+    "name": "Web Development III",
+    "semester": "Spring 2023",
+    "credits": 7.5,
+    "date": 1679526000,
+    "description": "Deepened skills in JavaScript and PHP to build interactive, dynamic websites. Worked with modern JavaScript (ES6+), CSS preprocessors, web services, and security principles. Created a development environment using Node.js and evaluated the use of TypeScript.",
+    "tags": [
+      "JavaScript",
+      "PHP",
+      "Node.js",
+      "TypeScript",
+      "Angular"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT173G/"
+  },
+  {
+    "code": "DT003G",
+    "name": "Databases",
+    "semester": "Spring 2023",
+    "credits": 7.5,
+    "date": 1674342000,
+    "description": "Learned the fundamentals of relational databases, including conceptual modeling, normalization, and SQL. Worked with creating, modifying, and querying databases, and practiced identifying and resolving design issues through labs and a final project.",
+    "tags": [
+      "databases",
+      "SQL",
+      "normalization",
+      "data modeling"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT003G/"
+  },
+  {
+    "code": "DT093G",
+    "name": "Web Development II",
+    "semester": "Spring 2023",
+    "credits": 7.5,
+    "date": 1674342000,
+    "description": "In this course, we developed dynamic and interactive websites using server-side scripting with PHP and SQL. We worked with forms, HTTP requests, and database integration, and learned how to handle data securely and efficiently. The course also introduced version control systems and client-server communication principles.",
+    "tags": [
+      "server-side",
+      "PHP",
+      "SQL",
+      "Git"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT093G/"
+  },
+  {
+    "code": "DT068G",
+    "name": "Web Usability",
+    "semester": "Autumn 2022",
+    "credits": 7.5,
+    "date": 1666476000,
+    "description": "In this course, we designed and evaluated accessible and user-friendly websites. We explored usability principles, interface design for different target groups, and applied typography, layout, and readability best practices. The course emphasized the full design process, including testing, implementation, and practical UI/UX work.",
+    "tags": [
+      "usability",
+      "accessibility",
+      "UI",
+      "UX",
+      "typography"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT068G/"
+  },
+  {
+    "code": "DT200G",
+    "name": "Graphic Techniques for the Web",
+    "semester": "Autumn 2022",
+    "credits": 7.5,
+    "date": 1666476000,
+    "description": "In this course, we worked with digital image and video editing for the web. We optimized media for online use, chose appropriate formats, and created visual content using graphic design tools. We learned about color models, file types, and resolutions, and practiced adapting images and videos for websites. We also designed mockups and analyzed websites to identify visual and usability issues, completing the course with a media-focused web design project.",
+    "tags": [
+      "web design",
+      "image editing",
+      "video editing",
+      "media optimization",
+      "graphics"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT200G/"
+  },
+  {
+    "code": "DT057G",
+    "name": "Web Development I",
+    "semester": "Autumn 2022",
+    "credits": 7.5,
+    "date": 1661032800,
+    "description": "We learned to create structured, responsive websites using HTML and CSS. The course introduced web design principles, validation, and layout techniques including positioning and responsive design. We used wireframes, mockups, and prototyping tools while exploring how browsers interact with web servers. Accessibility, copyright, and modern development standards were emphasized through labs and a project.",
+    "tags": [
+      "HTML",
+      "CSS",
+      "responsive design",
+      "accessibility",
+      "web development"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT057G/"
+  },
+  {
+    "code": "DT084G",
+    "name": "Introduction to JavaScript for Beginners",
+    "semester": "Autumn 2022",
+    "credits": 7.5,
+    "date": 1661032800,
+    "description": "In this course, we focused on solving problems through programming in JavaScript. The course covered variables, expressions, control structures, functions, and static vs. dynamic data types. We explored algorithms, memory handling, debugging techniques, and DOM manipulation. JavaScript libraries, programming paradigms, flowcharting, and version control were also introduced, reinforced through labs and a final project.",
+    "tags": [
+      "JavaScript",
+      "programming",
+      "algorithms",
+      "DOM",
+      "Git"
+    ],
+    "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT084G/"
+  }
+]

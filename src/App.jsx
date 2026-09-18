@@ -1,58 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useLenis from './hooks/useLenis';
-import 'lenis/dist/lenis.css';
-import PreLoader from './pages/PreLoader.jsx';
-import Home from "./pages/Home.jsx";
+import Preloader from './components/Preloader.jsx';
+import Home from './pages/Home.jsx';
 
-function App() {
-    useLenis();
+export default function App() {
+  const [ready, setReady] = useState(false);
+  const [loaderDone, setLoaderDone] = useState(false);
 
-    const [isLoaded, setIsLoaded] = useState(false);
+  useLenis(ready);
 
-    useEffect(() => {
-        let loadEventFired = false;
-        let timeoutFinished = false;
+  useEffect(() => {
+    document.body.classList.toggle('is-loading', !loaderDone);
+    return () => document.body.classList.remove('is-loading');
+  }, [loaderDone]);
 
-        const tryHideLoader = () => {
-            if (loadEventFired && timeoutFinished) {
-                setIsLoaded(true);
-            }
-        };
+  const handleReady = useCallback(() => setReady(true), []);
+  const handleDone = useCallback(() => setLoaderDone(true), []);
 
-        const timer = setTimeout(() => {
-            timeoutFinished = true;
-            tryHideLoader();
-        }, 4000);
-
-
-        const onPageLoad = () => {
-            loadEventFired = true;
-            tryHideLoader();
-        };
-
-        if (document.readyState === 'complete') {
-            onPageLoad();
-        } else {
-            window.addEventListener('load', onPageLoad);
-        }
-
-        return () => {
-            clearTimeout(timer);
-            window.removeEventListener('load', onPageLoad);
-        };
-    }, []);
-
-    return (
-        <>
-            <PreLoader isHidden={isLoaded} />
-            {isLoaded && (
-                <>
-                    <Home />
-
-                </>
-            )}
-        </>
-    );
+  return (
+    <>
+      {!loaderDone && <Preloader onReady={handleReady} onDone={handleDone} />}
+      {ready && <Home />}
+    </>
+  );
 }
-
-export default App;

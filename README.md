@@ -1,12 +1,57 @@
-# React + Vite
+# Roberto Piran Amedi — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio for Piran, AI & automation developer at Cyntora (Norrköping, Sweden).
+Built with React 19, Vite 7, GSAP 3.13 (ScrollTrigger, SplitText, ScrambleText) and Lenis smooth scroll.
 
-Currently, two official plugins are available:
+## Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build in dist/
+npm run preview  # preview the production build
+npm run lint
+```
 
-## Expanding the ESLint configuration
+## Where the content lives
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+All copy is data, not markup. Edit these files and the sections update:
+
+| File | What it holds |
+| --- | --- |
+| `src/data/profile.js` | Name, role, location, email, links, hero intro, about paragraphs, stats |
+| `src/data/cyntora.js` | The "Now" section: intro, six areas of work, stack, how I work |
+| `src/data/projects.js` | "Selected work": systems built at Cyntora, plus earlier projects |
+| `src/data/experience.json` | Work history (newest first) |
+| `src/data/placements.json` | Internships |
+| `src/data/education.json` | All courses (previously fetched from Firebase, now local) |
+| `src/data/skills.js` | Icons for the stack marquee |
+
+## Structure
+
+```
+src/
+  App.jsx               preloader → home
+  pages/Home.jsx        section order
+  components/           one folder-less component + css per section
+  hooks/useLenis.js     Lenis + GSAP ticker integration
+  lib/gsap.js           plugin registration, shared eases
+  lib/lenis.js          scrollTo helper used by nav / buttons
+  styles/global.css     design tokens (colours, fonts, spacing), base styles
+```
+
+The accent colour is a single token: `--accent` in `src/styles/global.css`.
+The hero canvas colours are in `src/components/HeroCanvas.jsx`.
+
+## Motion
+
+- Preloader counts to 100 while fonts and assets load, then wipes up.
+- Hero: masked SplitText character reveal, pointer parallax, scroll fade, canvas orbs.
+- About: word-by-word reading effect on scroll, counters.
+- Now: pinned horizontal scroll on desktop, stacked cards on mobile.
+- Work: floating preview that follows the pointer (desktop only).
+- Experience: timeline line drawn on scroll.
+- Education: GSAP-animated accordions per semester.
+- Marquees react to scroll velocity and direction.
+
+`prefers-reduced-motion` is respected: intro timelines jump to their end state and marquees pause.

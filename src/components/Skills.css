@@ -1,0 +1,29 @@
+.skills {
+  padding-block: clamp(48px, 7vw, 96px);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.skills__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 28px;
+  margin-right: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.skills__item img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}

@@ -1,198 +1,181 @@
-import React, { useEffect, useRef, useState } from 'react';
-import '../css/components/Hero.css';
-import DotLottie from './DotLottie.jsx';
-import LightRays from './LightRays.jsx';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { ArrowDown } from 'lucide-react';
+import { gsap, SplitText, useGSAP, reducedMotion } from '../lib/gsap';
+import { scrollTo } from '../lib/lenis';
+import { profile } from '../data/profile';
+import HeroCanvas from './HeroCanvas.jsx';
+import Marquee from './Marquee.jsx';
+import MagneticButton from './MagneticButton.jsx';
+import './Hero.css';
 
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import TechSwiper from "./TechSwiper.jsx";
-gsap.registerPlugin(ScrollTrigger);
+const TICKER = [
+  'AI agents',
+  'Automation',
+  'Integrations',
+  'Claude',
+  'MCP',
+  'Windmill',
+  'GoHighLevel',
+  'Cloudflare',
+  'Reporting',
+  'Outreach',
+  'TypeScript',
+  'Python',
+];
 
-const Hero = () => {
-    const [revealed, setRevealed] = useState(false);
+export default function Hero() {
+  const root = useRef(null);
+  const title = useRef(null);
+  const inner = useRef(null);
 
-    const vantaRef = useRef(null);
-    const vantaInstance = useRef(null);
+  useGSAP(
+    (_, contextSafe) => {
+      const still = reducedMotion();
+      let cancelled = false;
+      let splits = [];
 
-    const heroRef = useRef(null);
-    const textScrollRef = useRef(null);
-    const textMouseRef = useRef(null);
-
-    const scrollIntoAbout = (id) => {
-        const el = document.getElementById(id);
-                const y = el.getBoundingClientRect().top + window.scrollY;
-                const offset = 200;
-                window.scrollTo({top: y + offset, behavior: "smooth"});
-
-    }
-    useEffect(() => {
-        const t = setTimeout(() => setRevealed(true), 600);
-        return () => clearTimeout(t);
-    }, []);
-
-    useEffect(() => {
-        if (!vantaRef.current || typeof window === 'undefined') return;
-        if (!window.VANTA || !window.THREE) return;
-        if (vantaInstance.current) return;
-
-        let raf;
-        const initWhenSized = () => {
-            const el = vantaRef.current;
-            if (!el) return;
-            const { width, height } = el.getBoundingClientRect();
-            if (width < 10 || height < 10) {
-                raf = requestAnimationFrame(initWhenSized);
-                return;
-            }
-
-            vantaInstance.current = window.VANTA.WAVES({
-                el,
-                THREE: window.THREE,
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.0,
-                minWidth: 200.0,
-                scale: 1.0,
-                scaleMobile: 1.0,
-                backgroundColor: 0x000000,
-                color: 0x1522,
-                shininess: 35.0,
-                waveHeight: 22.0,
-                waveSpeed: 0.8,
-                zoom: 1.0
-            });
-        };
-
-        raf = requestAnimationFrame(initWhenSized);
-
-        return () => {
-            if (raf) cancelAnimationFrame(raf);
-            try { vantaInstance.current?.destroy(); } catch (e) {
-                console.error(e);
-            }
-            vantaInstance.current = null;
-        };
-    }, []);
-
-    useEffect(() => {
-        const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-        if (reduce) return;
-
-        const heroEl = heroRef.current;
-        const scrollEl = textScrollRef.current;
-        if (!heroEl || !scrollEl) return;
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: heroEl,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true,
-            },
+      // Shrink the title lines until each fits on one line (fonts must be loaded first)
+      const fitLines = () => {
+        const lines = title.current.querySelectorAll('.hero__line');
+        const max = title.current.clientWidth;
+        lines.forEach((line) => {
+          line.style.fontSize = '';
+          let size = parseFloat(getComputedStyle(line).fontSize);
+          let guard = 0;
+          while (line.scrollWidth > max && guard < 40) {
+            size *= 0.96;
+            line.style.fontSize = `${size}px`;
+            guard += 1;
+          }
         });
+      };
 
-        tl.fromTo(
-            scrollEl,
-            { y: 0, opacity: 1 },
-            { y: -60, opacity: 0.92, ease: 'none' }
-        );
+      const intro = contextSafe(() => {
+        if (cancelled) return;
+        fitLines();
 
-        return () => {
-            tl.scrollTrigger?.kill();
-            tl.kill();
+        const roleSplit = SplitText.create('.hero__role', { type: 'lines', mask: 'lines' });
+        const introSplit = SplitText.create('.hero__intro', { type: 'lines', mask: 'lines' });
+        const titleSplit = SplitText.create(title.current, { type: 'lines,chars', mask: 'lines' });
+        splits = [roleSplit, introSplit, titleSplit];
+
+        const tl = gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.2 });
+        tl.from('.hero__canvas', { opacity: 0, scale: 1.15, duration: 2.2, ease: 'power2.out' }, 0)
+          .from(titleSplit.chars, { yPercent: 115, duration: 1.3, stagger: { each: 0.028, from: 'start' } }, 0.1)
+          .from('.hero__top > *', { y: 14, opacity: 0, duration: 0.9, stagger: 0.08 }, 0.5)
+          .from(roleSplit.lines, { yPercent: 110, duration: 1.1, stagger: 0.09 }, 0.75)
+          .from(introSplit.lines, { yPercent: 110, opacity: 0, duration: 1, stagger: 0.07 }, 0.95)
+          .from('.hero__cta > *', { y: 18, opacity: 0, duration: 0.9, stagger: 0.08 }, 1.1)
+          .from('.hero__foot', { opacity: 0, y: 10, duration: 1 }, 1.25);
+
+        if (still) tl.progress(1);
+      });
+
+      gsap.set(title.current, { visibility: 'hidden' });
+      (document.fonts?.ready ?? Promise.resolve()).then(() => {
+        gsap.set(title.current, { visibility: 'visible' });
+        intro();
+      });
+
+      const onResize = () => fitLines();
+      window.addEventListener('resize', onResize);
+
+      // Scroll: content drifts up and fades while the canvas zooms
+      gsap.to(inner.current, {
+        yPercent: -18,
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
+      });
+      gsap.to('.hero__canvas', {
+        scale: 1.2,
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
+      });
+
+      // Pointer parallax on the title
+      if (!still && window.matchMedia('(pointer: fine)').matches) {
+        const xTo = gsap.quickTo(title.current, 'x', { duration: 0.8, ease: 'power3.out' });
+        const yTo = gsap.quickTo(title.current, 'y', { duration: 0.8, ease: 'power3.out' });
+        const onMove = (e) => {
+          const nx = (e.clientX / window.innerWidth) * 2 - 1;
+          const ny = (e.clientY / window.innerHeight) * 2 - 1;
+          xTo(nx * -14);
+          yTo(ny * -8);
         };
-    }, []);
+        root.current.addEventListener('pointermove', onMove, { passive: true });
+      }
 
-    useEffect(() => {
-        const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-        if (reduce) return;
+      return () => {
+        cancelled = true;
+        window.removeEventListener('resize', onResize);
+        splits.forEach((sp) => sp.revert());
+      };
+    },
+    { scope: root }
+  );
 
-        const heroEl = heroRef.current;
-        const mouseEl = textMouseRef.current;
-        if (!heroEl || !mouseEl) return;
+  return (
+    <section ref={root} id="hero" className="hero">
+      <HeroCanvas className="hero__canvas" />
+      <div className="hero__vignette" aria-hidden="true" />
 
-        const setX = gsap.quickTo(mouseEl, 'x', { duration: 0.35, ease: 'power3.out' });
-        const setY = gsap.quickTo(mouseEl, 'y', { duration: 0.35, ease: 'power3.out' });
+      <div ref={inner} className="hero__inner container">
+        <div className="hero__top label">
+          <span>{profile.name}</span>
+          <span className="hero__top-mid">{profile.location}</span>
+          <span>
+            <i className="hero__dot" /> {profile.availability}
+          </span>
+        </div>
 
-        const strengthX = 12; // px at viewport edges (reverse dir below)
-        const strengthY = 6;
+        <h1 ref={title} className="hero__title display-xl">
+          <span className="hero__line outline-text">Roberto</span>
+          <span className="hero__line">Piran Amedi</span>
+        </h1>
 
-        const onPointerMove = (e) => {
-            const rect = heroEl.getBoundingClientRect();
-            const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-            const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+        <div className="hero__bottom">
+          <p className="hero__role">
+            <span className="serif-italic">AI &amp; automation</span> developer
+            <br />
+            at <span className="hero__company">Cyntora</span>
+          </p>
 
-            const x = -nx * strengthX;
-            const y = -ny * strengthY;
-
-            setX(x);
-            setY(y);
-        };
-
-        const onPointerLeave = () => {
-            setX(0);
-            setY(0);
-        };
-
-        heroEl.addEventListener('pointermove', onPointerMove, { passive: true });
-        heroEl.addEventListener('pointerleave', onPointerLeave, { passive: true });
-
-        return () => {
-            heroEl.removeEventListener('pointermove', onPointerMove);
-            heroEl.removeEventListener('pointerleave', onPointerLeave);
-        };
-    }, []);
-
-    return (
-        <>
-        <section
-            ref={heroRef}
-            className={`hero ${revealed ? 'revealed' : ''}`}
-            id="hero"
-        >
-            <div ref={vantaRef} className="vanta-bg" aria-hidden="true" />
-            <div className="hero-overlay" aria-hidden="true" />
-
-            <LightRays
-                className="rays-layer"
-                raysOrigin="top-center"
-                raysColor="#7cd9ff"
-                raysSpeed={1.4}
-                lightSpread={0.9}
-                rayLength={1.3}
-                followMouse
-                mouseInfluence={0.15}
-                noiseAmount={0.08}
-                distortion={0.03}
-            />
-
-            <div ref={textScrollRef} className="text">
-                <div ref={textMouseRef}>
-                    <h1 className="hero-blur fade-in-up delay-1">ROBERTO PIRAN AMEDI</h1>
-                    <h2 className="hero-blur fade-in-up delay-2">Software Engineer</h2>
-                </div>
+          <div className="hero__side">
+            <p className="hero__intro">{profile.heroIntro}</p>
+            <div className="hero__cta">
+              <MagneticButton>
+                <a href="#work" className="btn btn--solid" data-cursor="hover" onClick={(e) => { e.preventDefault(); scrollTo('#work'); }}>
+                  See the work <span className="arrow">↗</span>
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a href="#now" className="btn" data-cursor="hover" onClick={(e) => { e.preventDefault(); scrollTo('#now'); }}>
+                  What I do at Cyntora
+                </a>
+              </MagneticButton>
             </div>
+          </div>
+        </div>
+      </div>
 
-{/*            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: .5, delay: 2, ease: "easeOut" }}>
-                <TechSwiper  />
-            </motion.div>*/}
-
-
-            <div onClick={() => {
-                scrollIntoAbout("about")
-            }} data-cursor-hover className="arrow-wrapper cursor-pointer fade-in-up delay-3">
-                <DotLottie />
-            </div>
-        </section>
-
-        </>
-
-    );
-};
-
-export default Hero;
+      <div className="hero__foot">
+        <button className="hero__scroll label" onClick={() => scrollTo('#about')} data-cursor="hover">
+          <ArrowDown size={14} className="hero__scroll-icon" /> Scroll
+        </button>
+        <Marquee
+          className="hero__marquee"
+          items={TICKER}
+          speed={60}
+          render={(item, i) => (
+            <span key={i} className="hero__tick">
+              {item}
+              <i className="hero__tick-sep" />
+            </span>
+          )}
+        />
+      </div>
+    </section>
+  );
+}
