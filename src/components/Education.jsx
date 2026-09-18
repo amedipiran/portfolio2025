@@ -1,225 +1,150 @@
-import React, { useEffect, useRef, useState } from 'react';
-import '../css/components/Education.css';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import {motion} from "framer-motion";
+import { useMemo, useRef, useState } from 'react';
+import { ArrowUpRight, Plus } from 'lucide-react';
+import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap';
+import courses from '../data/education.json';
+import SectionHead from './SectionHead.jsx';
+import './Education.css';
 
-gsap.registerPlugin(ScrollTrigger);
+const DEGREE_URL = 'https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB';
 
-const Education = () => {
-    const [courses, setCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [openSemesters, setOpenSemesters] = useState({});
-    const educationTitleRef = useRef(null);
-    const educationTextRef = useRef(null);
+function Semester({ semester, items, defaultOpen }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const content = useRef(null);
+  const credits = items.reduce((a, c) => a + Number(c.credits || 0), 0);
 
-    const semesterRefs = useRef([]);
-    semesterRefs.current = [];
+  useGSAP(
+    () => {
+      gsap.to(content.current, {
+        height: open ? 'auto' : 0,
+        duration: 0.75,
+        ease: 'expo.inOut',
+        onUpdate: () => ScrollTrigger.update(),
+        onComplete: () => ScrollTrigger.refresh(),
+      });
+      gsap.to(content.current.querySelectorAll('.edu__course'), {
+        y: open ? 0 : 12,
+        opacity: open ? 1 : 0,
+        duration: 0.6,
+        stagger: open ? 0.05 : 0,
+        delay: open ? 0.15 : 0,
+      });
+    },
+    { dependencies: [open] }
+  );
 
+  return (
+    <div className={`edu__sem ${open ? 'is-open' : ''}`}>
+      <button className="edu__toggle" onClick={() => setOpen((v) => !v)} aria-expanded={open} data-cursor="hover">
+        <span className="edu__sem-name">{semester}</span>
+        <span className="edu__sem-meta label">
+          {items.length} courses · {credits} hp
+        </span>
+        <span className="edu__icon">
+          <Plus size={18} strokeWidth={1.5} />
+        </span>
+      </button>
+      <div ref={content} className="edu__content" style={{ height: defaultOpen ? 'auto' : 0 }}>
+        <ul className="edu__courses">
+          {items.map((c) => (
+            <li key={c.code} className="edu__course">
+              <div className="edu__course-head">
+                <a href={c.url} target="_blank" rel="noreferrer" className="edu__course-name" data-cursor="hover">
+                  {c.name} <ArrowUpRight size={14} />
+                </a>
+                <span className="label">
+                  {c.code} · {c.credits} hp
+                </span>
+              </div>
+              <p className="edu__course-desc">{c.description}</p>
+              <ul className="edu__tags">
+                {c.tags.map((t) => (
+                  <li key={t}>#{t}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
+export default function Education() {
+  const root = useRef(null);
 
-    useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                const response = await fetch('https://portfolio-2025-e176f-default-rtdb.firebaseio.com/.json');
-                if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
-                const data = await response.json();
+  const semesters = useMemo(() => {
+    const map = new Map();
+    for (const c of courses) {
+      if (!map.has(c.semester)) map.set(c.semester, []);
+      map.get(c.semester).push(c);
+    }
+    return Array.from(map.entries());
+  }, []);
 
-                const educationData = data.education || {};
-                const formattedCourses = Object.entries(educationData).map(([id, course]) => ({
-                    id,
-                    ...course,
-                }));
+  const totalCredits = courses.reduce((a, c) => a + Number(c.credits || 0), 0);
 
-                setCourses(formattedCourses);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+  useGSAP(
+    () => {
+      gsap.from('.edu__degree > *', {
+        y: 24,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        scrollTrigger: { trigger: '.edu__degree', start: 'top 82%', once: true },
+      });
+      gsap.from('.edu__sem', {
+        y: 24,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.07,
+        scrollTrigger: { trigger: '.edu__list', start: 'top 85%', once: true },
+      });
+    },
+    { scope: root }
+  );
 
-        fetchCourses();
-    }, []);
+  return (
+    <section ref={root} id="education" className="section edu">
+      <div className="container">
+        <SectionHead index="05" label="Education">
+          Bachelor of Science, <span className="serif-italic">Computer Science.</span>
+        </SectionHead>
 
-    useEffect(() => {
-        if (educationTitleRef.current){
-            gsap.fromTo(
-                educationTitleRef.current,
-                {x: -20, autoAlpha: 0},
-                {
-                    x: 0,
-                    autoAlpha: 1,
-                    duration: .4,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: educationTitleRef.current,
-                        start: "top 70%",
-                        toggleActions: "play none none reverse",
-                    }
-                }
-            )
-        }
-    })
-
-    useEffect(() => {
-        if (educationTextRef.current){
-            gsap.fromTo(educationTextRef.current,
-                {x: 20, autoAlpha: 0},
-                {
-                    x: 0,
-                    autoAlpha: 1,
-                    duration: .4,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: educationTitleRef.current,
-                        start: "top 60%",
-                        toggleActions: "play none none reverse",
-                    }
-                }
-                )
-        }
-    });
-
-
-    useEffect(() => {
-        semesterRefs.current.forEach((el, i) => {
-            const direction = i % 2 === 0 ? -100 : 100;
-
-            gsap.fromTo(
-                el,
-                { x: direction, opacity: 0 },
-                {
-                    x: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 90%',
-                        end: 'top 50%',
-                        scrub: 1,
-                        toggleActions: 'play none none reverse',
-                    },
-                }
-            );
-        });
-    }, [courses]);
-
-    const toggleSemester = (semester) => {
-        setOpenSemesters((prev) => ({
-            ...prev,
-            [semester]: !prev[semester],
-        }));
-    };
-
-    if (loading) return <p>Loading education...</p>;
-    if (error) return <p>Error: {error}</p>;
-    if (!courses.length) return <p>No courses found.</p>;
-
-    const groupedBySemester = courses.reduce((acc, course) => {
-        acc[course.semester] = acc[course.semester] || [];
-        acc[course.semester].push(course);
-        return acc;
-    }, {});
-
-    const dividerGrow = {
-        hidden: { scaleX: 0, transformOrigin: 'left center' },
-        visible: { scaleX: 1, transition: { duration: 0.5, ease: 'easeOut' } },
-    };
-
-    return (
-        <section id="education">
-            <div className="education-container">
-                <div className="education-intro">
-                    <h2 ref={educationTitleRef}>Education</h2>
-                    <motion.div
-                        className="experience-divider"
-                        variants={dividerGrow}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.7 }}
-                        aria-hidden="true"
-                    />
-                    <p className="education-text" ref={educationTextRef}>
-                        Bachelor of Science with a major in Computer Science (Software Engineering) from{" "}
-                        <a
-                            href="https://www.miun.se/utbildning/program/programvaruteknik2/?lang=en-GB"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="education-link"
-                            data-cursor-hover
-                        >
-                            Mid Sweden University (Mittuniversitetet)
-                        </a>. This program covered topics such as software design, full-stack
-                        development, databases, software testing, algorithms, agile methodologies,
-                        and distributed systems. Emphasis was placed on hands-on projects, modern
-                        tools, and collaboration in software engineering teams.
-                    </p>
-                </div>
-
-                {Object.entries(groupedBySemester)
-                    .sort(([a], [b]) => {
-                        const parseSemester = (s) => {
-                            const [season, year] = s.split(' ');
-                            const seasonValue = season === 'Spring' ? 0 : 1;
-                            return { year: parseInt(year), seasonValue };
-                        };
-
-                        const aSem = parseSemester(a);
-                        const bSem = parseSemester(b);
-
-                        if (aSem.year !== bSem.year) {
-                            return bSem.year - aSem.year;
-                        }
-
-                        return bSem.seasonValue - aSem.seasonValue;
-                    })
-                    .map(([semester, semesterCourses], i) => {
-                        const sortedCourses = semesterCourses.sort((a, b) => b.date?.seconds - a.date?.seconds);
-
-                        return (
-                            <div
-                                key={semester}
-                                className="accordion-block"
-                                ref={(el) => el && (semesterRefs.current[i] = el)}>
-                                <button data-cursor-hover className="semester-toggle" onClick={() => toggleSemester(semester)}>
-                                    <span className="semester-title">{semester}</span>
-                                    <span className="toggle-icon">{openSemesters[semester] ? '−' : '+'}</span>
-                                </button>
-                                <div className={`accordion-content ${openSemesters[semester] ? 'open' : ''}`}>
-                                    <ul className="course-list">
-                                        {sortedCourses.map(({ id, name, credits, description, tags, url }) => (
-                                            <li key={id} className="education-item">
-                                                <h3>
-                                                    <a className="edu-link" data-cursor-hover href={url} target="_blank" rel="noopener noreferrer">
-                                                        {name}
-                                                    </a>
-                                                    <small> ({credits} hp)</small>
-                                                </h3>
-                                                <p>{description}</p>
-                                                <p className="course-code">Course Code: {id}</p>
-                                                {tags?.length > 0 && (
-                                                    <p>
-                                                        {tags.map((tag) => (
-                                                            <span key={tag} className="tag">
-                                                            #{tag}
-                                                        </span>
-                                                        ))}
-                                                    </p>
-                                                )}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        );
-                    })}
+        <div className="edu__degree">
+          <p className="edu__degree-text">
+            Software engineering major at{' '}
+            <a href={DEGREE_URL} target="_blank" rel="noreferrer" className="link-underline edu__degree-link" data-cursor="hover">
+              Mid Sweden University
+            </a>
+            . Software design, full-stack development, databases, testing, algorithms, agile methods and distributed
+            systems, with a strong emphasis on hands-on projects and teamwork.
+          </p>
+          <dl className="edu__meta">
+            <div>
+              <dt className="label">Degree</dt>
+              <dd>BSc Computer Science</dd>
             </div>
+            <div>
+              <dt className="label">Years</dt>
+              <dd>2022 — 2025</dd>
+            </div>
+            <div>
+              <dt className="label">Credits</dt>
+              <dd>{totalCredits} hp</dd>
+            </div>
+            <div>
+              <dt className="label">Courses</dt>
+              <dd>{courses.length}</dd>
+            </div>
+          </dl>
+        </div>
 
-        </section>
-    );
-};
-
-export default Education;
+        <div className="edu__list">
+          {semesters.map(([semester, items], i) => (
+            <Semester key={semester} semester={semester} items={items} defaultOpen={i === 0} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

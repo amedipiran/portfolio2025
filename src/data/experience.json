@@ -1,0 +1,76 @@
+[
+  {
+    "title": "AI & Automation Developer",
+    "company": "Cyntora AB",
+    "location": "Norrköping",
+    "start": "2025",
+    "end": "Present",
+    "current": true,
+    "bullets": [
+      "Build and run the automations, AI agents and reporting systems used across ~30 active clients.",
+      "Own the architecture of a group-wide connector platform and the internal AI tooling for designers and project managers."
+    ]
+  },
+  {
+    "title": "Freelance Software Developer",
+    "company": "Self-employed",
+    "location": "Remote",
+    "start": "2024",
+    "end": "2025",
+    "bullets": [
+      "Delivered websites and custom system solutions for clients including Primate Lounge, covering both frontend and backend.",
+      "Worked across modern stacks with a focus on performance, accessibility and clean deployment pipelines."
+    ]
+  },
+  {
+    "title": "Coordinator & Coach",
+    "company": "Work For You AB",
+    "location": "Norrköping",
+    "start": "2021",
+    "end": "2024",
+    "bullets": [
+      "Guided job seekers toward employment or studies through structured coaching and follow-ups.",
+      "Aligned resources with participant needs and collaborated across teams and stakeholders."
+    ]
+  },
+  {
+    "title": "Youth Leader",
+    "company": "Katrineholm Municipality · Perrongen / Lokstallarna",
+    "location": "Katrineholm",
+    "start": "2018",
+    "end": "2020",
+    "bullets": [
+      "Planned and led recreational and social activities for young people and supported them in building positive relationships."
+    ]
+  },
+  {
+    "title": "Librarian & Coach",
+    "company": "Katrineholm Municipality · Järvenskolan Tallås / Löparakademin",
+    "location": "Katrineholm",
+    "start": "2019",
+    "end": "2020",
+    "bullets": [
+      "Helped students find and use information and literature, and coached participants toward a healthy lifestyle and personal goals."
+    ]
+  },
+  {
+    "title": "Teaching Assistant & Night Football Leader",
+    "company": "Katrineholm Municipality · Järvenskolan Södra",
+    "location": "Katrineholm",
+    "start": "2017",
+    "end": "2018",
+    "bullets": [
+      "Supported students with structure and differentiated routines, and led an inclusive night football initiative that increased youth participation."
+    ]
+  },
+  {
+    "title": "Retail, Production & Care",
+    "company": "Willys AB · Kronfågel AB · Karsudden Regional Hospital",
+    "location": "Flen / Katrineholm",
+    "start": "2011",
+    "end": "2018",
+    "bullets": [
+      "Earlier roles as shop assistant, machine and food production operator, and mental health care assistant. Where the work ethic comes from."
+    ]
+  }
+]
