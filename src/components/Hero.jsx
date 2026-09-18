@@ -132,7 +132,9 @@ export default function Hero() {
 
         <h1 ref={title} className="hero__title display-xl">
           <span className="hero__line outline-text">Roberto</span>
-          <span className="hero__line">Piran Amedi</span>
+          <span className="hero__line">
+            Piran <span className="outline-text">Amedi</span>
+          </span>
         </h1>
 
         <div className="hero__bottom">
