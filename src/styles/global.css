@@ -153,8 +153,11 @@ img {
 }
 
 .outline-text {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(244, 242, 236, 0.85);
+  color: var(--fg);
+  opacity: 0.9;
+  /* Hollow outline of the glyph's outer edge. Plain text-stroke would show the
+     overlapping inner contours that Syne's A, M and T are built from. */
+  filter: url('#hollow-text');
 }
 
 /* ------------------------------------------------------------------

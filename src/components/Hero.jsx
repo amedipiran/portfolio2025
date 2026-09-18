@@ -118,6 +118,12 @@ export default function Hero() {
 
   return (
     <section ref={root} id="hero" className="hero">
+      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+        <filter id="hollow-text" colorInterpolationFilters="sRGB">
+          <feMorphology in="SourceAlpha" operator="erode" radius="1.4" result="inner" />
+          <feComposite in="SourceGraphic" in2="inner" operator="out" />
+        </filter>
+      </svg>
       <HeroCanvas className="hero__canvas" />
       <div className="hero__vignette" aria-hidden="true" />
 
