@@ -146,12 +146,11 @@
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.02);
   color: inherit;
-  transition: border-color 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+  transition: border-color 0.4s var(--ease-out);
 }
 
 a.work__earlier-card:hover {
   border-color: var(--accent);
-  transform: translateY(-3px);
 }
 
 .work__earlier-head {
