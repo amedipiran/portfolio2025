@@ -48,7 +48,7 @@ export const systems = [
     id: 'platform',
     title: 'Connector platform & internal AI tools',
     kind: 'Angry Creative Group · architecture',
-    meta: 'In progress',
+    meta: 'In production',
     description:
       'Architecture for a connector platform shared across the group, plus internal tools that let designers and project managers use AI in their daily work.',
     tags: ['Architecture', 'TypeScript', 'Python', 'Claude Code'],

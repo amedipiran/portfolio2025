@@ -10,7 +10,7 @@ function Cover({ project }) {
     return <img src={project.image} alt="" loading="lazy" className="work__img" />;
   }
   return (
-    <div className="work__cover" style={{ '--c': project.accent }}>
+    <div className="work__cover" style={{ '--c': project.accent, '--len': project.cover.word.length }}>
       <span className="work__cover-word">{project.cover.word}</span>
       <span className="work__cover-sub">{project.cover.sub}</span>
     </div>

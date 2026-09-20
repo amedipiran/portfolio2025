@@ -54,6 +54,13 @@
   }
 }
 
+/* The nav shows the availability pill from 1280px, so don't repeat it here */
+@media (min-width: 1280px) {
+  .hero__top-status {
+    display: none;
+  }
+}
+
 .hero__dot {
   display: inline-block;
   width: 7px;

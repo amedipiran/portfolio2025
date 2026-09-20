@@ -131,7 +131,7 @@ export default function Hero() {
         <div className="hero__top label">
           <span>{profile.name}</span>
           <span className="hero__top-mid">{profile.location}</span>
-          <span>
+          <span className="hero__top-status">
             <i className="hero__dot" /> {profile.availability}
           </span>
         </div>
