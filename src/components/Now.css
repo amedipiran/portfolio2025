@@ -139,8 +139,9 @@
   font-size: clamp(6rem, 12vw, 11rem);
   line-height: 1;
   letter-spacing: -0.06em;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(244, 242, 236, 0.16);
+  color: var(--fg);
+  opacity: 0.18;
+  filter: url('#hollow-text-thin');
   pointer-events: none;
   z-index: -1;
 }

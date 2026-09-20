@@ -35,6 +35,17 @@ export default function Home() {
 
   return (
     <>
+      {/* Shared filters: outline a glyph's outer edge (text-stroke would expose Syne's overlapping contours) */}
+      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+        <filter id="hollow-text" colorInterpolationFilters="sRGB">
+          <feMorphology in="SourceAlpha" operator="erode" radius="1.4" result="inner" />
+          <feComposite in="SourceGraphic" in2="inner" operator="out" />
+        </filter>
+        <filter id="hollow-text-thin" colorInterpolationFilters="sRGB">
+          <feMorphology in="SourceAlpha" operator="erode" radius="1" result="inner" />
+          <feComposite in="SourceGraphic" in2="inner" operator="out" />
+        </filter>
+      </svg>
       <div ref={progress} className="progress" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
       <Cursor />
