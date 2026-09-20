@@ -14,7 +14,7 @@ export default function Skills() {
     <section className="skills" aria-label="Technologies">
       <div className="container">
         <p className="label">
-          <span className="idx">06</span>Stack
+          <span className="idx">06</span>Technologies I’ve worked with
         </p>
       </div>
       <Marquee items={skillRows[0]} render={item} speed={50} />

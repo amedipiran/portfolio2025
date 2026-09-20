@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { gsap, useGSAP } from '../lib/gsap';
+import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap';
 import { systems, earlier } from '../data/projects';
 import SectionHead from './SectionHead.jsx';
 import './Work.css';
@@ -49,46 +49,76 @@ export default function Work() {
         const xTo = gsap.quickTo(el, 'x', { duration: 0.6, ease: 'power3.out' });
         const yTo = gsap.quickTo(el, 'y', { duration: 0.6, ease: 'power3.out' });
         const rTo = gsap.quickTo(el, 'rotation', { duration: 0.8, ease: 'power3.out' });
-        let lastX = 0;
+        const items = gsap.utils.toArray('.work__item');
+        const pointer = { x: 0, y: 0, seen: false };
         let active = -1;
-
-        const onMove = (e) => {
-          xTo(e.clientX);
-          yTo(e.clientY);
-          const vx = e.clientX - lastX;
-          lastX = e.clientX;
-          rTo(gsap.utils.clamp(-10, 10, vx * 0.4));
-        };
 
         const show = (i) => {
           if (active === i) return;
+          const wasHidden = active === -1;
           active = i;
+          if (wasHidden) {
+            // Appear right at the pointer instead of gliding in from a stale position
+            xTo(pointer.x, pointer.x);
+            yTo(pointer.y, pointer.y);
+            rTo(0, 0);
+          }
           media.forEach((m, mi) => {
             gsap.to(m, {
               clipPath: mi === i ? 'inset(0% 0% 0% 0%)' : 'inset(0% 0% 100% 0%)',
               scale: mi === i ? 1 : 1.15,
-              duration: 0.7,
+              duration: wasHidden ? 0.5 : 0.7,
               ease: 'expo.out',
               overwrite: true,
             });
           });
-          gsap.to(el, { opacity: 1, scale: 1, duration: 0.5, overwrite: 'auto' });
-        };
-        const hide = () => {
-          active = -1;
-          gsap.to(el, { opacity: 0, scale: 0.9, duration: 0.4, overwrite: 'auto' });
+          gsap.to(el, { opacity: 1, scale: 1, duration: 0.4, overwrite: 'auto' });
         };
 
-        gsap.utils.toArray('.work__item').forEach((item, i) => {
-          item.addEventListener('pointerenter', () => show(i));
+        const hide = () => {
+          if (active === -1) return;
+          active = -1;
+          gsap.to(el, { opacity: 0, scale: 0.9, duration: 0.3, overwrite: 'auto' });
+        };
+
+        // Works for both pointer movement and scrolling under a resting pointer
+        const sync = () => {
+          if (!pointer.seen) return;
+          const hit = document.elementFromPoint(pointer.x, pointer.y)?.closest?.('.work__item');
+          const i = hit ? items.indexOf(hit) : -1;
+          if (i === -1) hide();
+          else show(i);
+        };
+
+        const onMove = (e) => {
+          const vx = pointer.seen ? e.clientX - pointer.x : 0;
+          pointer.x = e.clientX;
+          pointer.y = e.clientY;
+          pointer.seen = true;
+          sync();
+          if (active !== -1) {
+            xTo(e.clientX);
+            yTo(e.clientY);
+            rTo(gsap.utils.clamp(-10, 10, vx * 0.4));
+          }
+        };
+        const onLeaveWindow = () => hide();
+
+        window.addEventListener('pointermove', onMove, { passive: true });
+        document.documentElement.addEventListener('mouseleave', onLeaveWindow);
+        const st = ScrollTrigger.create({
+          trigger: root.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: sync,
+          onLeave: hide,
+          onLeaveBack: hide,
         });
-        const list = root.current.querySelector('.work__list');
-        list.addEventListener('pointerleave', hide);
-        root.current.addEventListener('pointermove', onMove, { passive: true });
 
         return () => {
-          list.removeEventListener('pointerleave', hide);
-          root.current?.removeEventListener('pointermove', onMove);
+          st.kill();
+          window.removeEventListener('pointermove', onMove);
+          document.documentElement.removeEventListener('mouseleave', onLeaveWindow);
         };
       });
 
