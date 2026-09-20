@@ -9,6 +9,7 @@ const FACTS = [
   ['Currently', 'AI & Automation Developer, Cyntora'],
   ['Education', 'BSc Computer Science, Mid Sweden University'],
   ['Focus', 'Agents, integrations, reporting, clean architecture'],
+  ['Member', 'Active member of Mensa'],
 ];
 
 export default function About() {

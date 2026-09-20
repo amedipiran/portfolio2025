@@ -36,30 +36,40 @@ export default function Marquee({ items, render, speed = 80, reverse = false, cl
         { x: reverse ? 0 : -w, duration: w / speed, ease: 'none', repeat: -1 }
       );
 
+      // The marquee may run backwards for a long time, and a reversed infinite tween
+      // stalls at time 0, so start far into the timeline.
+      tween.totalTime(tween.duration() * 5000);
+
       if (reducedMotion()) {
         tween.pause();
         return undefined;
       }
 
-      let settle;
+      // Scroll sets a direction and a speed boost. The actual timeScale eases toward
+      // that target every frame, so reversals and velocity spikes never jerk.
+      let dir = 1;
+      let boost = 0;
+      let current = 1;
+
       const st = ScrollTrigger.create({
         onUpdate: (self) => {
-          const v = self.getVelocity();
-          const boost = gsap.utils.clamp(-4, 4, v / 250);
-          const sign = v < 0 ? -1 : 1;
-          gsap.to(tween, {
-            timeScale: sign * (1 + Math.abs(boost)),
-            duration: 0.3,
-            overwrite: true,
-          });
-          clearTimeout(settle);
-          settle = setTimeout(() => gsap.to(tween, { timeScale: 1, duration: 0.8 }), 120);
+          if (self.direction) dir = self.direction;
+          boost = Math.max(boost, gsap.utils.clamp(0, 3, Math.abs(self.getVelocity()) / 400));
         },
       });
 
+      const tick = () => {
+        const r = gsap.ticker.deltaRatio(60);
+        boost *= Math.pow(0.94, r);
+        const target = dir * (1 + boost);
+        current += (target - current) * (1 - Math.pow(0.93, r));
+        tween.timeScale(current);
+      };
+      gsap.ticker.add(tick);
+
       return () => {
         st.kill();
-        clearTimeout(settle);
+        gsap.ticker.remove(tick);
       };
     },
     { scope: root, dependencies: [copies, speed, reverse] }
