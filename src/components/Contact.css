@@ -3,7 +3,7 @@
   padding-bottom: 32px;
   border-top: 1px solid var(--line);
   background:
-    radial-gradient(70% 60% at 50% 110%, rgba(42, 201, 179, 0.12), transparent 70%),
+    radial-gradient(70% 60% at 50% 110%, rgba(111, 227, 255, 0.12), transparent 70%),
     var(--bg);
   display: flex;
   flex-direction: column;
