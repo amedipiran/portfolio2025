@@ -6,9 +6,9 @@ import { gsap, reducedMotion } from '../lib/gsap';
  * Rendered at reduced resolution and stretched via CSS for performance.
  */
 const ORBS = [
-  { color: [111, 227, 255], r: 0.46, a: 0.42, sx: 0.32, sy: 0.9, fx: 0.00016, fy: 0.00021, ph: 0 },
+  { color: [45, 206, 163], r: 0.46, a: 0.42, sx: 0.32, sy: 0.9, fx: 0.00016, fy: 0.00021, ph: 0 },
   { color: [139, 125, 255], r: 0.4, a: 0.34, sx: 0.78, sy: 0.25, fx: 0.00013, fy: 0.00017, ph: 2.1 },
-  { color: [94, 224, 212], r: 0.44, a: 0.26, sx: 0.6, sy: 0.75, fx: 0.00019, fy: 0.00012, ph: 4.2 },
+  { color: [46, 190, 130], r: 0.44, a: 0.28, sx: 0.6, sy: 0.75, fx: 0.00019, fy: 0.00012, ph: 4.2 },
   { color: [255, 138, 91], r: 0.34, a: 0.2, sx: 0.15, sy: 0.3, fx: 0.00011, fy: 0.00015, ph: 1.1 },
 ];
 

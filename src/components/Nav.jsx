@@ -24,7 +24,10 @@ export default function Nav() {
   const go = (id) => (e) => {
     e.preventDefault();
     setOpen(false);
-    scrollTo(`#${id}`, { offset: 0 });
+    // The open menu pauses Lenis, and a paused Lenis ignores scrollTo.
+    // Resume it before scrolling instead of waiting for the close effect.
+    getLenis()?.start();
+    scrollTo(`#${id}`, { offset: 0, force: true });
   };
 
   // Intro + hide-on-scroll + active section tracking
