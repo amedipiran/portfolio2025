@@ -20,6 +20,9 @@ export default function Nav() {
   const logo = useRef(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
+  // While true the bar stays visible (menu open, or a menu link is scrolling the page)
+  const navLock = useRef(false);
+  const unlockTimer = useRef(null);
 
   const go = (id) => (e) => {
     e.preventDefault();
@@ -27,7 +30,20 @@ export default function Nav() {
     // The open menu pauses Lenis, and a paused Lenis ignores scrollTo.
     // Resume it before scrolling instead of waiting for the close effect.
     getLenis()?.start();
-    scrollTo(`#${id}`, { offset: 0, force: true });
+
+    // Keep the bar in place for the whole programmatic scroll, otherwise it slides
+    // away while the overlay is still closing.
+    navLock.current = true;
+    clearTimeout(unlockTimer.current);
+    const unlock = () => {
+      clearTimeout(unlockTimer.current);
+      unlockTimer.current = setTimeout(() => {
+        navLock.current = false;
+        unlockTimer.current = null;
+      }, 150);
+    };
+    unlockTimer.current = setTimeout(unlock, 2500); // fallback if onComplete never fires
+    scrollTo(`#${id}`, { offset: 0, force: true, onComplete: unlock });
   };
 
   // Intro + hide-on-scroll + active section tracking
@@ -42,14 +58,41 @@ export default function Nav() {
         ease: 'expo.out',
       });
 
-      const show = gsap.quickTo(root.current, 'yPercent', { duration: 0.5, ease: 'power3.out' });
+      // Hide on scroll down, show on scroll up, with hysteresis: the bar only reacts
+      // after a sustained move in one direction, so touch jitter and iOS bounce at the
+      // page edges cannot make it flicker. It animates once per state change.
+      const HIDE_AFTER = 70;
+      const SHOW_AFTER = 40;
+      let hidden = false;
+      let lastDir = 0;
+      let anchor = 0;
+
+      const setHidden = (next) => {
+        if (next === hidden) return;
+        hidden = next;
+        gsap.to(root.current, { yPercent: next ? -120 : 0, duration: 0.45, ease: 'power3.out', overwrite: true });
+      };
+
       ScrollTrigger.create({
         start: 'top top',
         end: 'max',
         onUpdate: (self) => {
-          const hide = self.direction === 1 && self.scroll() > 160;
-          show(hide ? -120 : 0);
-          root.current.classList.toggle('nav--scrolled', self.scroll() > 40);
+          const y = self.scroll();
+          root.current.classList.toggle('nav--scrolled', y > 40);
+
+          if (navLock.current || y < 160) {
+            setHidden(false);
+            anchor = y;
+            lastDir = 0;
+            return;
+          }
+          if (self.direction !== lastDir) {
+            lastDir = self.direction;
+            anchor = y;
+          }
+          const moved = y - anchor;
+          if (moved > HIDE_AFTER) setHidden(true);
+          else if (moved < -SHOW_AFTER) setHidden(false);
         },
       });
 
@@ -88,6 +131,7 @@ export default function Nav() {
     const links = overlay.current.querySelectorAll('.nav__overlay-link');
     const meta = overlay.current.querySelectorAll('.nav__overlay-meta > *');
     if (open) {
+      navLock.current = true;
       lenis?.stop();
       gsap.timeline()
         .set(overlay.current, { pointerEvents: 'auto' })
@@ -95,6 +139,9 @@ export default function Nav() {
         .from(links, { yPercent: 110, duration: 0.9, stagger: 0.06, ease: 'expo.out' }, '-=0.45')
         .from(meta, { opacity: 0, y: 10, stagger: 0.05, duration: 0.6 }, '-=0.5');
     } else {
+      // Closed without picking a link: release the lock. If a link was picked,
+      // the pending scroll releases it when it completes.
+      if (!unlockTimer.current) navLock.current = false;
       lenis?.start();
       gsap.timeline()
         .to(overlay.current, { clipPath: 'inset(0 0 100% 0)', duration: 0.7, ease: 'expo.inOut' })
