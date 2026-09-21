@@ -9,7 +9,7 @@ export const systems = [
       'Customer data from the ERP and the webshop lands in GoHighLevel, gets segmented, and triggers sales alerts, cross-sell emails and onboarding for new accounts. The jobs run in Windmill.',
     tags: ['Windmill', 'GoHighLevel', 'REST APIs', 'TypeScript'],
     cover: { word: 'Growth', sub: 'ERP → CRM → sales alerts' },
-    accent: '#2dcea3',
+    accent: '#2ac9b3',
   },
   {
     id: 'agents',

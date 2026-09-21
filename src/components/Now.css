@@ -108,13 +108,13 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(60% 50% at 80% 0%, rgba(45, 206, 163, 0.14), transparent 70%);
+  background: radial-gradient(60% 50% at 80% 0%, rgba(42, 201, 179, 0.14), transparent 70%);
   opacity: 0;
   transition: opacity 0.5s var(--ease-out);
 }
 
 .now__card:hover {
-  border-color: rgba(45, 206, 163, 0.45);
+  border-color: rgba(42, 201, 179, 0.45);
 }
 
 .now__card:hover::after {
